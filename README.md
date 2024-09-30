@@ -6,10 +6,10 @@
 
 **Clone the repository:**
    ```bash
-   git clone https://github.com/
+   git clone https://github.com/IfranAlamBishal/NexTour.git
    ```
    ```bash
-   cd The-Book-Vault
+   cd NexTour
    ```
    ```bash
    npm install

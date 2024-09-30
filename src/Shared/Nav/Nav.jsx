@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { RiMapPinUserFill } from "react-icons/ri";
 
 const Nav = () => {
 
@@ -33,15 +34,15 @@ const Nav = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-xl md:text-2xl lg:text-4xl">NexTour</Link>
+                    <Link to='/' className="btn btn-ghost text-xl md:text-2xl lg:text-4xl font-bold">NexTour</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 font-semibold text-lg">
                         {navLinks}
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <Link><RiMapPinUserFill className=" w-10 h-10"/></Link>
                 </div>
             </div>
         </div>
