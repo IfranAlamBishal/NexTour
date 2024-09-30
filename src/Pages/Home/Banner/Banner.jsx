@@ -2,6 +2,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 
 
 
@@ -31,11 +32,11 @@ const Banner = () => {
                         className="w-full h-64 md:h-[400px] lg:h-[600px] object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className=' text-center bg-black bg-opacity-40 rounded-lg p-3'>
-                            <h1 className=' text-center text-xl md:text-3xl font-bold text-white mb-3'>Discover Your Next Adventure with NexTour!</h1>
-                            <button className="bg-red-500 text-white px-6 py-3 rounded-full text-lg hover:bg-red-600 transition duration-300 items-center w-40">
+                        <div className=' text-center bg-black bg-opacity-40 rounded-lg p-5'>
+                            <h1 className=' text-center text-xl md:text-3xl font-bold text-white mb-5'>Discover Your Next Adventure with NexTour!</h1>
+                            <Link to='/tours' className="bg-orange-500 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-orange-600 transition duration-300 items-center w-40">
                                 Lets Go
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -48,11 +49,11 @@ const Banner = () => {
                         className="w-full h-64 md:h-[400px] lg:h-[600px] object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className=' text-center bg-black bg-opacity-40 rounded-lg p-3'>
-                            <h1 className=' text-center text-xl md:text-3xl font-bold text-white mb-3'>Make Every Trip an Adventure with NexTour!</h1>
-                            <button className="bg-red-500 text-white px-6 py-3 rounded-full text-lg hover:bg-red-600 transition duration-300 items-center w-40">
+                        <div className=' text-center bg-black bg-opacity-40 rounded-lg p-5'>
+                            <h1 className=' text-center text-xl md:text-3xl font-bold text-white mb-5'>Make Every Trip an Adventure with NexTour!</h1>
+                            <Link to='/tours' className="bg-orange-500 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-orange-600 transition duration-300 items-center w-40">
                                 Lets Go
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -65,11 +66,11 @@ const Banner = () => {
                         className="w-full h-64 md:h-[400px] lg:h-[600px] object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className=' text-center bg-black bg-opacity-40 rounded-lg p-3'>
-                            <h1 className=' text-center text-xl md:text-3xl font-bold text-white mb-3'>Adventure is Calling,Answer with NexTour!</h1>
-                            <button className="bg-red-500 text-white px-6 py-3 rounded-full text-lg hover:bg-red-600 transition duration-300 items-center w-40">
+                        <div className=' text-center bg-black bg-opacity-40 rounded-lg p-5'>
+                            <h1 className=' text-center text-xl md:text-3xl font-bold text-white mb-5'>Adventure is Calling,Answer with NexTour!</h1>
+                            <Link to='/tours' className="bg-orange-500 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-orange-600 transition duration-300 items-center w-40">
                                 Lets Go
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

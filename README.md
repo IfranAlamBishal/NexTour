@@ -1,6 +1,20 @@
 # NexTour
+NexTour is a user-friendly website that simplifies discovering and booking travel experiences. Users can search, filter, and sort tour packages, explore destinations via an interactive map, and manage bookings through personalized profiles and dashboards.
+The platform includes user reviews and ratings, a community blog for sharing travel stories, and one-click social media sharing. NexTour also integrates discount codes and allows users to save trips in a wishlist for future bookings, making it the perfect tool for travel planning and inspiration.
+
 
 ## Features
+
+-	Search, Filter and Sort Tour Packages
+-	Interactive Map
+-	User Profile
+-	User and Admin Dashboard
+-	User Reviews and Ratings
+-	Community Blog Section
+-	One Click Share
+-	Discount Code Integration
+-	Booking and Wishlist
+
 
 ## Installation
 
