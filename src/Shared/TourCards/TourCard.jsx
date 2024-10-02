@@ -16,7 +16,7 @@ const TourCard = ({ spot }) => {
                     <div>
                         <p className=" font-semibold">{rating} <span><FaRegStar className=" text-orange-500 inline mb-1"/></span></p>
                     </div>
-                    <h2 className="card-title">{tourists_spot_name}</h2>
+                    <h2 className="card-title text-2xl">{tourists_spot_name}</h2>
                     <p>{country_Name}</p>
                     <p>Starts From: <span className=" text-orange-500 font-semibold"> {average_cost} BDT</span></p>
                     <div className="card-actions justify-end">
