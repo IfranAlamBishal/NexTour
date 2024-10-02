@@ -34,7 +34,7 @@ const Nav = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-xl md:text-2xl lg:text-4xl font-bold">NexTour</Link>
+                    <Link to='/' className="btn btn-ghost text-2xl md:text-3xl lg:text-4xl font-bold gap-0"><span className=" text-orange-500">Nex</span>Tour</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 font-semibold text-lg">

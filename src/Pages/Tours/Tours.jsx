@@ -1,7 +1,7 @@
 
 const Tours = () => {
     return (
-        <div>
+        <div className=" ">
             Tours
         </div>
     );
