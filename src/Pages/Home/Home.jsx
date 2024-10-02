@@ -1,5 +1,6 @@
 import Banner from "./Banner/Banner";
 import PopularTours from "./PopularTours/PopularTours";
+import WhyNexTour from "./WhyNexTour/WhyNexTour";
 
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
             </div>
             <div className=" w-5/6 mx-auto">
                 <PopularTours/>
+                <WhyNexTour/>
             </div>
         </div>
     );

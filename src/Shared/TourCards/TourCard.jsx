@@ -4,7 +4,7 @@ const TourCard = ({ spot }) => {
     const { image, tourists_spot_name, country_Name, rating, average_cost } = spot;
 
     return (
-        <div>
+        <div className=" flex flex-1">
             <div className="card max-w-sm bg-white shadow-xl">
                 <figure>
                     <img
@@ -20,7 +20,7 @@ const TourCard = ({ spot }) => {
                     <p>{country_Name}</p>
                     <p>Starts From: <span className=" text-orange-500 font-semibold"> {average_cost} BDT</span></p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">View Details</button>
+                        <button className="btn bg-orange-500 text-white">View Details</button>
                     </div>
                 </div>
             </div>

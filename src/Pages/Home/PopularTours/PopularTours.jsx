@@ -20,7 +20,7 @@ const PopularTours = () => {
 
     console.log(tours);
     return (
-        <div>
+        <div className=" my-20">
             <SectionHeader
             title ='Most Popular Tours'
             description ='Explore our top-rated tours, crafted to offer the best travel experiences and memorable journeys!'
