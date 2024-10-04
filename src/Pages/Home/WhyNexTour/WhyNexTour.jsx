@@ -1,6 +1,7 @@
 import emailjs from '@emailjs/browser';
 import { useRef } from 'react';
 import SectionHeader from "../../../Shared/SectionHeader/SectionHeader";
+import Swal from 'sweetalert2';
 
 const WhyNexTour = () => {
 
@@ -19,12 +20,20 @@ const WhyNexTour = () => {
             })
             .then(
                 () => {
-                    console.log('SUCCESS!');
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sent!",
+                        text: "You've successfully sent the mail.",
+                      });
 
                     form.current.reset();
                 },
                 (error) => {
-                    console.log('FAILED...', error.text);
+                    Swal.fire({
+                        title: "Error!",
+                        text: error.text,
+                        icon: "error"
+                      });
                 },
             );
     };
