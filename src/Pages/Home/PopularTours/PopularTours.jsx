@@ -18,7 +18,6 @@ const PopularTours = () => {
         tourData();
     },[])
 
-    console.log(tours);
     return (
         <div className=" my-20">
             <SectionHeader
