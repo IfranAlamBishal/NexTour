@@ -4,10 +4,14 @@ import { RiMapPinUserFill } from "react-icons/ri";
 const Nav = () => {
 
     const navLinks = <>
-    <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/tours'>Tours</NavLink></li>
-    <li><NavLink to='/blogs'>Blog</NavLink></li>
-    <li><NavLink to='/contacts'>Contact Us</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/tours'>Tours</NavLink></li>
+        <li><NavLink to='/blogs'>Blog</NavLink></li>
+        <li><NavLink to='/contacts'>Contact Us</NavLink></li>
+    </>
+
+    const loginBtn = <>
+        <Link to='/login'><RiMapPinUserFill className=" w-10 h-10" /></Link>
     </>
     return (
         <div>
@@ -42,7 +46,7 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link><RiMapPinUserFill className=" w-10 h-10"/></Link>
+                    {loginBtn}
                 </div>
             </div>
         </div>

@@ -61,7 +61,7 @@ const AvailableTours = () => {
 
                 <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg">
                     <input type="text" placeholder="spot name" className="input input-bordered w-full max-w-md" name="search" />
-                    <button className="absolute  right-2.5 top-4"><FaSearch className="text-[#ef4444] w-5 h-5" /></button>
+                    <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
                 </form>
 
                 {/* Category */}
