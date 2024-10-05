@@ -1,20 +1,64 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const { createUser, updateName, updatePhoto, googleLogIn } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const onSubmit = data => {
-        console.log(data)
+        createUser(data.email, data.password)
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Registered !",
+                    text: "You have successfully registered!",
+                });
+                updateName(data.name);
+                updatePhoto(data.photo);
 
+                navigate('/')
+            })
+
+            .catch(error => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops !",
+                    text: error.massage,
+                });
+            })
     };
+
+
+    const handleGoogleLogIn = () => {
+        googleLogIn()
+            .then(() => {
+                Swal.fire({
+                    title: "Registered!",
+                    text: "You've successfully registered.",
+                    icon: "success"
+                });
+                navigate('/')
+
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops !",
+                    text: error.massage,
+                });
+            })
+    };
+ 
 
     return (
         <div>
@@ -76,7 +120,7 @@ const Register = () => {
                             </div>
                         </form>
                         <div className=" px-8  mb-8 space-y-8">
-                            <button className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl"/>Google</button>
+                            <button onClick={handleGoogleLogIn} className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl" />Google</button>
                         </div>
                     </div>
                 </div>

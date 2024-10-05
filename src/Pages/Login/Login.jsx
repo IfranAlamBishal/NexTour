@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 
 
 const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const {logIn, googleLogIn} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const forgotPassword = () => {
         Swal.fire({
@@ -23,7 +26,45 @@ const Login = () => {
 
     const onSubmit = data => {
         console.log(data)
+        logIn(data.email, data.password)
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Logged in!",
+                    text: "You have successfully logged in!",
+                });
+                navigate('/');
+            })
 
+            .catch(error => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops !",
+                    text: error.massage,
+                });
+            })
+
+    };
+
+    const handleGoogleLogIn = () => {
+        googleLogIn()
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Logged in!",
+                    text: "You've successfully logged in.",
+                    
+                });
+                navigate('/')
+
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops !",
+                    text: error.massage,
+                });
+            })
     };
 
 
@@ -75,7 +116,7 @@ const Login = () => {
                             </div>
                         </form>
                         <div className=" px-8  mb-8 space-y-8">
-                            <button className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl"/>Google</button>
+                            <button onClick={handleGoogleLogIn} className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl"/>Google</button>
                         </div>
                     </div>
                 </div>
