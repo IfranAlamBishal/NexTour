@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
 
@@ -23,11 +24,13 @@ const Register = () => {
 
             <div className="hero min-h-screen bg-orange-500 pt-32 pb-14">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-10">
+
                     <div className="text-center lg:text-left text-white">
                         <h1 className="text-5xl font-bold">Register now!</h1>
                         <p className="py-6 font-semibold">Join NexTour today and unlock a world of extraordinary travel experiences.</p>
                     </div>
-                    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-white text-black">
+
+                    <div className="card shrink-0 w-80 mx-auto md:max-w-sm shadow-2xl bg-white text-black">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
@@ -64,7 +67,8 @@ const Register = () => {
                                     }
                                 </div>
                                 {errors.password && <span className=" text-xs text-red-600 mt-1">Password must have at least 6 characters including at least a upper case(A-Z) and a lower case(a-z) letter.</span>}
-                                <p className=" text-base font-medium">Already have an account ? <Link to="/login" className=" text-blue-600">Log in now</Link> and start your journey with us!</p>
+                                <p className=" text-base font-medium">Already have an account ? <br />
+                                    <Link to="/login" className=" text-blue-600">Log in now</Link> and continue your journey with us!</p>
                             </div>
 
                             <div className="form-control mt-6">
@@ -72,7 +76,7 @@ const Register = () => {
                             </div>
                         </form>
                         <div className=" px-8  mb-8 space-y-8">
-                            <button className="btn bg-orange-500 text-white w-full">Google</button>
+                            <button className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl"/>Google</button>
                         </div>
                     </div>
                 </div>

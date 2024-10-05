@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 
 const Login = () => {
@@ -38,7 +39,7 @@ const Login = () => {
                         <h1 className="text-5xl font-bold">Login now!</h1>
                         <p className="py-6 font-semibold">Log in and continue your journey to unforgettable destinations with NexTour.</p>
                     </div>
-                    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-white text-black">
+                    <div className="card shrink-0 w-80 mx-auto md:max-w-sm shadow-2xl bg-white text-black">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
@@ -74,7 +75,7 @@ const Login = () => {
                             </div>
                         </form>
                         <div className=" px-8  mb-8 space-y-8">
-                            <button className="btn bg-orange-500 text-white w-full">Google</button>
+                            <button className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl"/>Google</button>
                         </div>
                     </div>
                 </div>

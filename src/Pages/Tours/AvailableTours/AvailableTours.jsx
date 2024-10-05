@@ -67,7 +67,7 @@ const AvailableTours = () => {
                 {/* Category */}
                 <div>
                     <select onChange={handleCcountry} className="select select-bordered w-full max-w-xs text-lg font-medium">
-                        <option selected >
+                        <option selected disabled>
                             Country
                         </option>
                         {countries.map((country, index) => (

@@ -56,7 +56,7 @@ const WhyNexTour = () => {
 
                 <div className=" bg-orange-500 flex-1 p-5 rounded-xl items-center">
                     <h1 className=" text-2xl md:text-3xl font-semibold text-white text-center mb-5"> Have any query? <br />
-                        Lst us know
+                        Let us know
                     </h1>
                     <div className="card bg-white w-full max-w-sm mx-auto shrink-0 shadow-2xl">
 
