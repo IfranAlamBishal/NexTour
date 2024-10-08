@@ -12,7 +12,7 @@ const Register = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const { createUser, updateName, updatePhoto, googleLogIn } = useContext(AuthContext);
+    const { createUser, updateName, googleLogIn } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const onSubmit = data => {
@@ -24,7 +24,6 @@ const Register = () => {
                     text: "You have successfully registered!",
                 });
                 updateName(data.name);
-                updatePhoto(data.photo);
 
                 navigate('/')
             })
@@ -82,12 +81,12 @@ const Register = () => {
                                 </label>
                                 <input type="text" {...register("name")} placeholder="name" className="input input-bordered bg-white text-black" required />
                             </div>
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Profile picture</span>
                                 </label>
                                 <input type="url" {...register("photo")} placeholder="photo" className="input input-bordered bg-white text-black" required />
-                            </div>
+                            </div> */}
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>

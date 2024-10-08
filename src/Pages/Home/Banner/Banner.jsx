@@ -27,7 +27,7 @@ const Banner = () => {
                 {/* Slide 1 */}
                 <div className="relative ">
                     <img
-                        src="https://i.ibb.co.com/v3HY5Nw/Phuket.jpg"
+                        src="https://i.ibb.co.com/KhpWw5M/thai.jpg"
                         alt="Slide 1"
                         className="w-full h-64 md:h-[400px] lg:h-[600px] object-cover"
                     />
@@ -44,7 +44,7 @@ const Banner = () => {
                 {/* Slide 2 */}
                 <div className="relative">
                     <img
-                        src="https://i.ibb.co.com/L1Z103r/Cameron-Highlands.webp"
+                        src="https://i.ibb.co.com/t2byFYN/bd2.jpg"
                         alt="Slide 2"
                         className="w-full h-64 md:h-[400px] lg:h-[600px] object-cover"
                     />
@@ -61,7 +61,7 @@ const Banner = () => {
                 {/* Slide 3 */}
                 <div className="relative">
                     <img
-                        src="https://i.ibb.co.com/2qQpww5/Bali3.jpg"
+                        src="https://i.ibb.co.com/RDrpk1Q/Phnom-Penh.jpg"
                         alt="Slide 3"
                         className="w-full h-64 md:h-[400px] lg:h-[600px] object-cover"
                     />

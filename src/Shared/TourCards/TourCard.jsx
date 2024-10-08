@@ -3,6 +3,7 @@ import { FaRegStar } from "react-icons/fa6";
 const TourCard = ({ spot }) => {
     const { image, tourists_spot_name, country_Name, rating, average_cost } = spot;
 
+
     return (
         <div className=" flex flex-1">
             <div className="card max-w-sm bg-white shadow-xl">
