@@ -8,6 +8,7 @@ import Blogs from "../Pages/Blogs/Blogs";
 import Contacts from "../Pages/Contacts/Contacts";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import TourDetailsPage from "../Shared/TourCards/TourDetailsPage/TourDetailsPage";
 
 
 export const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
         {
           path: "/tours",
           element: <Tours/>,
+        },
+        {
+          path: "/details/:id",
+          element: <TourDetailsPage/>,
         },
         {
           path: "/blogs",

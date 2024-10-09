@@ -2,21 +2,20 @@ import { useState } from "react";
 import SectionHeader from "../../../Shared/SectionHeader/SectionHeader";
 import { useEffect } from "react";
 import TourCard from "../../../Shared/TourCards/TourCard";
+import useAxios from "../../../Hooks/useAxios";
 
 const PopularTours = () => {
 
     const [tours, setTours] = useState([]);
+    const axiosSecure = useAxios();
 
     useEffect(() => {
-        const tourData = async() => {
-            const response = await fetch("./touristSpots.json");
-            const data = await response.json();
-            const popular = data.filter(spot => spot.rating == 5);
+        axiosSecure.get('/tours')
+        .then(res => {
+            const popular = res.data.filter(spot => spot.rating == 5);
             setTours(popular);
-            
-        }
-        tourData();
-    },[])
+        })
+    },[axiosSecure])
 
     return (
         <div className=" my-20">

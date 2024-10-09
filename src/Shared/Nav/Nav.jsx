@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { RiMapPinUserFill } from "react-icons/ri";
+import { FaCircleUser } from "react-icons/fa6";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
@@ -43,8 +44,8 @@ const handleLogOut = () => {
                                 <Link to="/" ><img src={user.photoURL} alt="" className="w-8 h-8 my-auto rounded-full " /></Link>
                             </div>
                             :
-                            <div className="w-9 h-9 my-auto pt-2 pl-2 tooltip tooltip-bottom" data-tip={user.email}>
-                                <Link to="/" ><RiMapPinUserFill className=" w-10 h-10" /></Link>
+                            <div className="my-auto pt-2 pl-2 tooltip tooltip-bottom" data-tip={user.email}>
+                                <Link to="/" ><FaCircleUser className=" w-8 h-8"/></Link>
                             </div>
                     }
                     <Link to='/' onClick={handleLogOut} className=" btn btn-error text-white text-base font-semibold">Log Out</Link>
@@ -77,6 +78,7 @@ const handleLogOut = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {navLinks}
+                            {loginBtn}
                         </ul>
                     </div>
                     <Link to='/' className="btn btn-ghost text-2xl md:text-3xl lg:text-4xl font-bold gap-0"><span className=" text-orange-500">Nex</span>Tour</Link>
@@ -86,7 +88,7 @@ const handleLogOut = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end hidden lg:flex">
                     {loginBtn}
                 </div>
             </div>
