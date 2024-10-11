@@ -41,11 +41,11 @@ const handleLogOut = () => {
                     {
                         user.photoURL ?
                             <div className="tooltip tooltip-bottom pt-2 pl-2" data-tip={user.email}>
-                                <Link to="/profile" ><img src={user.photoURL} alt="" className="w-8 h-8 my-auto rounded-full " /></Link>
+                                <Link to="/dashboard/profile" ><img src={user.photoURL} alt="" className="w-8 h-8 my-auto rounded-full " /></Link>
                             </div>
                             :
                             <div className="my-auto pt-2 pl-2 tooltip tooltip-bottom" data-tip={user.email}>
-                                <Link to="/profile" ><FaCircleUser className=" w-8 h-8"/></Link>
+                                <Link to="/dashboard/profile" ><FaCircleUser className=" w-8 h-8"/></Link>
                             </div>
                     }
                     <Link to='/' onClick={handleLogOut} className=" btn btn-error text-white text-base font-semibold">Log Out</Link>
