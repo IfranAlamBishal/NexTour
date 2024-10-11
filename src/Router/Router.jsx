@@ -11,8 +11,12 @@ import Register from "../Pages/Register/Register";
 import TourDetailsPage from "../Shared/TourCards/TourDetailsPage/TourDetailsPage";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import Dashboard from "../Layouts/Main/Dashboard/Dashboard";
-import Profile from "../Shared/Dashboard/Profile/Profile";
+import Profile from "../Dashboard/Profile/Profile";
 import ProtectedRoutes from "./ProtectedRoutes/ProtectedRoutes";
+import Wishlist from "../Dashboard/Wishlist/Wishlist";
+import BookedTours from "../Dashboard/BookedTours/BookedTours";
+import UserReviews from "../Dashboard/UserReviews/UserReviews";
+import UserBlogs from "../Dashboard/UserBlogs/UserBlogs";
 
 
 export const router = createBrowserRouter([
@@ -60,6 +64,22 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile/>,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist/>,
+      },
+      {
+        path: "bookedTours",
+        element: <BookedTours/>,
+      },
+      {
+        path: "user_reviews",
+        element: <UserReviews/>,
+      },
+      {
+        path: "user_blogs",
+        element: <UserBlogs/>,
       }
     ]
   }

@@ -7,6 +7,8 @@ import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxios from "../../Hooks/useAxios";
+import useUserData from "../../Hooks/useUserData";
 
 const Register = () => {
 
@@ -14,6 +16,8 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateName, emailVerify, logOut, googleLogIn } = useContext(AuthContext);
     const navigate = useNavigate();
+    const axiosSecure = useAxios();
+    const [users] = useUserData();
 
     const onSubmit = data => {
         createUser(data.email, data.password)
@@ -23,12 +27,12 @@ const Register = () => {
 
                 emailVerify(checkUser)
                     .then(() => {
+                        logOut();
                         Swal.fire({
                             icon: "success",
                             title: "Registered !",
                             text: "You have successfully registered! Please verify your email.",
                         });
-                        logOut();
                         navigate('/')
                     })
                     .catch((error) => {
@@ -53,12 +57,32 @@ const Register = () => {
 
     const handleGoogleLogIn = () => {
         googleLogIn()
-            .then(() => {
-                Swal.fire({
-                    title: "Registered!",
-                    text: "You've successfully registered.",
-                    icon: "success"
-                });
+            .then((result) => {
+                const alreadyUser = users.filter(user => user.email == result.user.email)
+                if (alreadyUser.length == 0) {
+                    const user = {
+                        name: result.user.displayName,
+                        email: result.user.email,
+                        role: 'user'
+                    }
+                    axiosSecure.post('/register', user)
+                        .then()
+
+                    Swal.fire({
+                        title: "Registered!",
+                        text: "You've successfully registered.",
+                        icon: "success"
+                    });
+                }
+
+                else {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Logged in!",
+                        text: "You have successfully logged in!",
+                    });
+                }
+
                 navigate('/')
 
             })

@@ -7,6 +7,8 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import useAxios from "../../Hooks/useAxios";
+import useUserData from "../../Hooks/useUserData";
 
 
 const Login = () => {
@@ -15,6 +17,8 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { logIn, logOut, googleLogIn } = useContext(AuthContext);
     const navigate = useNavigate();
+    const axiosSecure = useAxios();
+    const [users] = useUserData();
 
     const forgotPassword = () => {
         Swal.fire({
@@ -30,6 +34,17 @@ const Login = () => {
                 const checkUser = userCredential.user;
 
                 if (checkUser.emailVerified) {
+                    const alreadyUser = users.filter(user => user.email == checkUser.email)
+
+                    if (alreadyUser.length == 0) {
+                        const user = {
+                            name: checkUser.displayName,
+                            email: checkUser.email,
+                            role: 'user'
+                        }
+                        axiosSecure.post('/register', user)
+                            .then()
+                    }
                     Swal.fire({
                         icon: "success",
                         title: "Logged in!",
@@ -55,19 +70,32 @@ const Login = () => {
                     title: "Oops !",
                     text: error.massage,
                 });
+
             })
 
     };
 
     const handleGoogleLogIn = () => {
         googleLogIn()
-            .then(() => {
+            .then((result) => {
+                const alreadyUser = users.filter(user => user.email == result.user.email)
+                if (alreadyUser.length == 0) {
+                    const user = {
+                        name: result.user.displayName,
+                        email: result.user.email,
+                        role: 'user'
+                    }
+                    axiosSecure.post('/register', user)
+                        .then()
+                }
+
                 Swal.fire({
                     icon: "success",
                     title: "Logged in!",
-                    text: "You've successfully logged in.",
-
+                    text: "You have successfully logged in!",
                 });
+
+
                 navigate('/')
 
             })

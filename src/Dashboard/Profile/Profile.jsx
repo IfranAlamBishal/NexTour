@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import { FaCircleUser } from "react-icons/fa6";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 
 const Profile = () => {
     const { user, loading } = useContext(AuthContext);

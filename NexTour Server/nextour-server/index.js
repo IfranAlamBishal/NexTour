@@ -31,6 +31,7 @@ async function run() {
     // await client.connect();
 
     const tourData = client.db('NexTourDB').collection('TourCollection');
+    const userCollection = client.db('NexTourDB').collection('UserCollection');
 
 
     // Get Operations
@@ -47,6 +48,20 @@ async function run() {
       res.send(tour);
     })
 
+    app.get("/all_user", async(req,res) => {
+      const result = await userCollection.find().toArray();
+      res.send(result);
+    })
+
+
+    // Post Operations
+
+    app.post("/register", async(req,res) => {
+      const user = req.body;
+            const result = await userCollection.insertOne(user);
+            res.send(result);
+    })
+
 
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
@@ -57,9 +72,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
-
 
 
 
