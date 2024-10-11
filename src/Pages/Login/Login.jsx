@@ -13,7 +13,7 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const {logIn, googleLogIn} = useContext(AuthContext);
+    const { logIn, logOut, googleLogIn } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const forgotPassword = () => {
@@ -25,15 +25,28 @@ const Login = () => {
     }
 
     const onSubmit = data => {
-        console.log(data)
         logIn(data.email, data.password)
-            .then(() => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Logged in!",
-                    text: "You have successfully logged in!",
-                });
-                navigate('/');
+            .then((userCredential) => {
+                const checkUser = userCredential.user;
+
+                if (checkUser.emailVerified) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Logged in!",
+                        text: "You have successfully logged in!",
+                    });
+                    navigate('/');
+                }
+
+                else {
+                    logOut();
+                    Swal.fire({
+                        icon: "error",
+                        title: "Not verified !",
+                        text: "Please verify your email first",
+                    });
+                }
+
             })
 
             .catch(error => {
@@ -53,7 +66,7 @@ const Login = () => {
                     icon: "success",
                     title: "Logged in!",
                     text: "You've successfully logged in.",
-                    
+
                 });
                 navigate('/')
 
@@ -73,7 +86,7 @@ const Login = () => {
             <Helmet>
                 <title>NexTour | Log in</title>
             </Helmet>
-            
+
             <div className="hero min-h-screen bg-orange-500 pt-32 pb-14">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-10">
                     <div className="text-center lg:text-left text-white">
@@ -99,9 +112,9 @@ const Login = () => {
                                 <div onClick={() => setShowPassword(!showPassword)} className=" text-lg text-orange-500 flex justify-end p-1">
                                     {
                                         showPassword ?
-                                            <Link><FaEye className=" w-6 h-6"/></Link>
+                                            <Link><FaEye className=" w-6 h-6" /></Link>
                                             :
-                                            <Link><FaEyeSlash className=" w-6 h-6"/></Link>
+                                            <Link><FaEyeSlash className=" w-6 h-6" /></Link>
                                     }
                                 </div>
                                 {errors.password && <span className=" text-xs text-red-600 mt-1">Password must have at least 6 characters including at least a upper case(A-Z) and a lower case(a-z) letter.</span>}
@@ -116,7 +129,7 @@ const Login = () => {
                             </div>
                         </form>
                         <div className=" px-8  mb-8 space-y-8">
-                            <button onClick={handleGoogleLogIn} className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl"/>Google</button>
+                            <button onClick={handleGoogleLogIn} className="btn bg-orange-500 text-white w-full"><FcGoogle className=" text-2xl" />Google</button>
                         </div>
                     </div>
                 </div>

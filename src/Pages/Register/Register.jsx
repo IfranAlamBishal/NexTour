@@ -12,20 +12,33 @@ const Register = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const { createUser, updateName, googleLogIn } = useContext(AuthContext);
+    const { createUser, updateName, emailVerify, logOut, googleLogIn } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const onSubmit = data => {
         createUser(data.email, data.password)
-            .then(() => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Registered !",
-                    text: "You have successfully registered!",
-                });
+            .then((userCredential) => {
                 updateName(data.name);
+                const checkUser = userCredential.user;
 
-                navigate('/')
+                emailVerify(checkUser)
+                    .then(() => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Registered !",
+                            text: "You have successfully registered! Please verify your email.",
+                        });
+                        logOut();
+                        navigate('/')
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops !",
+                            text: error.massage,
+                        });
+                    })
+
             })
 
             .catch(error => {
@@ -57,7 +70,7 @@ const Register = () => {
                 });
             })
     };
- 
+
 
     return (
         <div>
