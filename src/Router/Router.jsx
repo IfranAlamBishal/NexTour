@@ -9,12 +9,14 @@ import Contacts from "../Pages/Contacts/Contacts";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import TourDetailsPage from "../Shared/TourCards/TourDetailsPage/TourDetailsPage";
+import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 
 
 export const router = createBrowserRouter([
     {
       path: "/",
       element: <Main/>,
+      errorElement: <ErrorPage/>,
       children: [
         {
             path: "/",

@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   background-color: white;
   font-family: "Poppins", sans-serif;
+}
+
+.error-bg {
+  background-image: url(../src/assets/icon/errorpagejpg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
