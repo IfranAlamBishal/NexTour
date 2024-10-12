@@ -95,7 +95,6 @@ const Login = () => {
                     text: "You have successfully logged in!",
                 });
 
-
                 navigate('/')
 
             })

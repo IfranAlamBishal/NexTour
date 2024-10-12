@@ -32,23 +32,24 @@ async function run() {
 
     const tourData = client.db('NexTourDB').collection('TourCollection');
     const userCollection = client.db('NexTourDB').collection('UserCollection');
+    const wishlistCollection = client.db('NexTourDB').collection('WishlistCollection');
 
 
     // Get Operations
 
-    app.get("/tours", async(req,res) => {
-        const tours = await tourData.find().toArray();
-        res.send(tours);
+    app.get("/tours", async (req, res) => {
+      const tours = await tourData.find().toArray();
+      res.send(tours);
     })
 
-    app.get("/tour/:id", async(req,res) => {
+    app.get("/tour/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const tour = await tourData.findOne(query);
       res.send(tour);
     })
 
-    app.get("/all_user", async(req,res) => {
+    app.get("/all_user", async (req, res) => {
       const result = await userCollection.find().toArray();
       res.send(result);
     })
@@ -56,11 +57,53 @@ async function run() {
 
     // Post Operations
 
-    app.post("/register", async(req,res) => {
+    app.post("/register", async (req, res) => {
       const user = req.body;
-            const result = await userCollection.insertOne(user);
-            res.send(result);
+      const result = await userCollection.insertOne(user);
+      res.send(result);
     })
+
+    app.post("/add_to_wishlist", async (req, res) => {
+      const { email, tourId, packageType } = req.body;
+
+      if (!email || !tourId || !packageType) {
+        return res.status(400).send('Email, Tour ID, and Package Type are required');
+      }
+      try {
+        // Check if the wishlist for this user exists
+        const userWishlist = await wishlistCollection.findOne({ email });
+
+        const newWishlistItem = { tourId, packageType };
+
+        if (userWishlist) {
+          // If the wishlist exists, check if the tour is already there
+          const alreadyInWishlist = userWishlist.wishlist.some(
+            (item) => item.tourId === tourId && item.packageType === packageType
+          );
+
+          if (!alreadyInWishlist) {
+            await wishlistCollection.updateOne(
+              { email },
+              { $push: { wishlist: newWishlistItem } }
+            );
+            return res.status(200).send('Tour with package added to wishlist');
+          } else {
+            return res.status(400).send('Tour with this package is already in the wishlist');
+          }
+        } else {
+          // If no wishlist exists, create a new one
+          await wishlistCollection.insertOne({
+            email,
+            wishlist: [newWishlistItem]
+          });
+          return res.status(201).send('Wishlist created and tour with package added');
+        }
+      } catch (error) {
+        console.error('Error adding to wishlist:', error);
+        res.status(500).send('Internal server error');
+      }
+
+    });
 
 
     // Send a ping to confirm a successful connection
@@ -77,9 +120,9 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('NexTour Server is running');
+  res.send('NexTour Server is running');
 })
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })

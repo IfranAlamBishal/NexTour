@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../../../Hooks/useAxios";
 import { FaRegStar } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 
 const TourDetailsPage = () => {
 
@@ -10,6 +12,8 @@ const TourDetailsPage = () => {
     const [tourDetails, setTourDetails] = useState({});
     const axiosSecure = useAxios();
     const [spinner, setSpinner] = useState(true);
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -27,6 +31,53 @@ const TourDetailsPage = () => {
     }, [axiosSecure, id]);
 
     const { image, tourists_spot_name, country_Name, location, short_description, rating, travel_time, totalVisitorsPerYear, average_cost } = tourDetails;
+
+
+    const addToWishlist = (packageType) => {
+        if (!user) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops !",
+                text: "Please log in first to continue.",
+            });
+            navigate('/login');
+        }
+        else {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to add this package on you wishlist?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, add to wishlist!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const add = {
+                        email: user.email,
+                        tourId: id,
+                        packageType: packageType
+                    }
+
+                    axiosSecure.post("/add_to_wishlist", add)
+                        .then(() => {
+                            Swal.fire({
+                                title: "Added!",
+                                text: "Added successfully.",
+                                icon: "success"
+                            });
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops !",
+                                text: "Can't add this. May be this package is already on your wishlist.",
+                            });
+                        })
+                }
+            })
+        }
+    }
 
     return (
         <div className=" w-3/4 mx-auto min-h-screen py-28">
@@ -71,7 +122,7 @@ const TourDetailsPage = () => {
                         </div>
                         <div className="card-actions justify-end ">
                             <div className=" flex flex-col md:flex-row gap-5 lg:pt-32">
-                                <Link className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
+                                <Link onClick={() => addToWishlist('regular')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 "><FaShareNodes /></Link>
                             </div>
@@ -91,7 +142,7 @@ const TourDetailsPage = () => {
                         </div>
                         <div className="card-actions justify-end">
                             <div className=" flex flex-col md:flex-row gap-5 lg:pt-32">
-                                <Link className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
+                                <Link onClick={() => addToWishlist('premium')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 "><FaShareNodes /></Link>
                             </div>
