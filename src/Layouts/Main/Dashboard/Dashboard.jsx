@@ -17,7 +17,7 @@ const Dashboard = () => {
                 <Link to='/' className="btn text-2xl md:text-3xl lg:text-4xl font-bold gap-0 mb-5"><span className=" text-orange-500">Nex</span>Tour</Link>
                 {dashLinks}
                 <hr className=" w-2/3 mx-auto my-5 border-2 border-black" />
-                <Link to='/'>Home</Link>
+                <Link to='/' className=" ml-3">Home</Link>
             </div>
             <div className=" flex-1">
                 <Outlet></Outlet>

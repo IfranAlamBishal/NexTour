@@ -10,7 +10,7 @@ const WhyNexTour = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-         const serviceID = 'service_htuemzi';
+        const serviceID = 'service_htuemzi';
         const templateID = 'template_7wslt7r';
         const publicKey = 'DDljNtrLPZ85Gw2zI';
 
