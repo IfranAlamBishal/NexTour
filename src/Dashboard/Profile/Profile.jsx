@@ -18,7 +18,7 @@ const Profile = () => {
         e.preventDefault();
         const newPhoto =e.target.photo.value;
         updatePhoto(newPhoto);
-        
+
         window.location.reload();
     }
 
@@ -64,7 +64,7 @@ const Profile = () => {
                 <div className="modal" role="dialog">
                     <div className="modal-box">
                         <div>
-                            <form onSubmit={updateUserName} className="card-body">
+                            <form onSubmit={updateUserName} className="card-body p-4">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Name</span>

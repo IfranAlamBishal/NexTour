@@ -1,20 +1,27 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import SectionHeader from "../../Shared/SectionHeader/SectionHeader";
 
 const BookedTours = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
-    if (loading) {
-        return <div className="flex justify-center">
-            <Helmet>
-                <title>NexTour | Booked Tours</title>
-            </Helmet>
-            <span className="loading loading-infinity w-36 text-orange-500"></span>
-        </div>
-    }
-    if(user){
-        <h1 className="flex justify-center">Found User</h1>
+    if (user) {
+        return (
+            <div>
+                <Helmet>
+                    <title>NexTour | Booked Tours</title>
+                </Helmet>
+
+                <div>
+                    <SectionHeader
+                        title='Booked Tours'
+                    ></SectionHeader>
+
+                    <h1 className=" text-4xl font-semibold text-orange-500 text-center my-40"> Nothing is on your Booked Tours</h1>
+                </div>
+            </div>
+        );
     }
 };
 

@@ -54,6 +54,13 @@ async function run() {
       res.send(result);
     })
 
+    app.get("/wishlish", async(req,res) => {
+      const email = req.query.email;
+      const query = { email: email};
+      const userWishlist = await wishlistCollection.findOne(query);
+      res.send(userWishlist);
+    })
+
 
     // Post Operations
 

@@ -122,7 +122,7 @@ const TourDetailsPage = () => {
                         </div>
                         <div className="card-actions justify-end ">
                             <div className=" flex flex-col md:flex-row gap-5 lg:pt-32">
-                                <Link onClick={() => addToWishlist('regular')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
+                                <Link onClick={() => addToWishlist('Regular')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 "><FaShareNodes /></Link>
                             </div>
@@ -142,7 +142,7 @@ const TourDetailsPage = () => {
                         </div>
                         <div className="card-actions justify-end">
                             <div className=" flex flex-col md:flex-row gap-5 lg:pt-32">
-                                <Link onClick={() => addToWishlist('premium')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
+                                <Link onClick={() => addToWishlist('Premium')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
                                 <Link className="btn bg-orange-500 text-white text-lg h-12 "><FaShareNodes /></Link>
                             </div>
