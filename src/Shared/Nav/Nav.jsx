@@ -57,7 +57,7 @@ const handleLogOut = () => {
     </>
     return (
         <div>
-            <div className="navbar bg-white bg-opacity-40 px-10 p-2 h-20 md:h-24 fixed z-50">
+            <div className="navbar bg-white bg-opacity-80 px-10 p-2 h-20 md:h-24 fixed z-50">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

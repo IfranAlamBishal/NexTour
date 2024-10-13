@@ -113,6 +113,24 @@ async function run() {
     });
 
 
+    // Delete Operation 
+
+    app.delete("/remove_from_wishlist", async(req,res) => {
+      const {email, tourId} = req.query;
+
+      if(email && tourId){
+        const result = await wishlistCollection.updateOne(
+          { email: email },
+          {
+            $pull: { wishlist: { tourId: tourId } },
+          }
+        );
+
+        res.send(result);
+      }
+    })
+
+
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
