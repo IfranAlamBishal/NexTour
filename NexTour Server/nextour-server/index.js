@@ -33,6 +33,7 @@ async function run() {
     const tourData = client.db('NexTourDB').collection('TourCollection');
     const userCollection = client.db('NexTourDB').collection('UserCollection');
     const wishlistCollection = client.db('NexTourDB').collection('WishlistCollection');
+    const blogsCollection = client.db('NexTourDB').collection('BlogsCollection');
 
 
     // Get Operations
@@ -40,26 +41,31 @@ async function run() {
     app.get("/tours", async (req, res) => {
       const tours = await tourData.find().toArray();
       res.send(tours);
-    })
+    });
 
     app.get("/tour/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const tour = await tourData.findOne(query);
       res.send(tour);
-    })
+    });
 
     app.get("/all_user", async (req, res) => {
       const result = await userCollection.find().toArray();
       res.send(result);
-    })
+    });
 
     app.get("/wishlish", async(req,res) => {
       const email = req.query.email;
       const query = { email: email};
       const userWishlist = await wishlistCollection.findOne(query);
       res.send(userWishlist);
-    })
+    });
+
+    app.get("/all_blogs", async(req,res) => {
+      const result = await blogsCollection.find().toArray();
+      res.send(result);
+    });
 
 
     // Post Operations
