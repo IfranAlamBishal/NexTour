@@ -22,7 +22,6 @@ const Wishlist = () => {
                 }
             })
             setWishlist(wishlistDetails);
-            console.log(wishlistDetails);
         }
     }, [userWishlist, tourData])
 
