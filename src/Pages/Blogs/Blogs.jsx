@@ -7,8 +7,7 @@ import useBlogsData from "../../Hooks/useBlogsData";
 const Blogs = () => {
 
     const [blogs, setBlogs] = useState([]);
-    const blogsData = useBlogsData();
-
+    const [blogsData] = useBlogsData();
 
     useEffect(() => {
         if(blogsData && blogsData.length > 0){

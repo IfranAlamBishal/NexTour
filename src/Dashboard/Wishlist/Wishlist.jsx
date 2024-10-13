@@ -53,11 +53,10 @@ const Wishlist = () => {
             confirmButtonText: "Yes, remove it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(tour);
                 const email = user.email;
                 axiosSecure.delete(`/remove_from_wishlist?email=${email}&tourId=${tour._id}`)
                     .then(res => {
-                        if (res.data.deletedCount > 0) {
+                        if (res.data.modifiedCount > 0) {
                             refetch();
                             Swal.fire({
                                 title: "Removed!",
