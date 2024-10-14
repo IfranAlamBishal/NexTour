@@ -33,10 +33,6 @@ const Wishlist = () => {
                 setWishlist(wishlistDetails);
             }
 
-            else {
-                setWishlist([]);
-            }
-
             setLoading(false);
 
         }
