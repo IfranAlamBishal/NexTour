@@ -17,6 +17,7 @@ import Wishlist from "../Dashboard/Wishlist/Wishlist";
 import BookedTours from "../Dashboard/BookedTours/BookedTours";
 import UserReviews from "../Dashboard/UserReviews/UserReviews";
 import UserBlogs from "../Dashboard/UserBlogs/UserBlogs";
+import BlogDetails from "../Pages/Blogs/BLogDetails";
 
 
 export const router = createBrowserRouter([
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blogDetails/:id",
+        element: <BlogDetails/>,
       },
       {
         path: "/contacts",

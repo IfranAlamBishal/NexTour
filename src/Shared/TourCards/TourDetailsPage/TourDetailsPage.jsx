@@ -5,6 +5,7 @@ import { FaRegStar } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const TourDetailsPage = () => {
 
@@ -81,6 +82,10 @@ const TourDetailsPage = () => {
 
     return (
         <div className=" w-3/4 mx-auto min-h-screen py-28">
+
+            <Helmet>
+                <title>NexTour | Tour Details</title>
+            </Helmet>
 
             <div className=" flex justify-center">
                 {

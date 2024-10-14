@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const BlogCard = ({ blog }) => {
 
-    const { user_name, photo, title, description } = blog;
+    const { _id, user_name, photo, title, description } = blog;
     const shortDes = description.split(" ").slice(0, 30).join(" ") + "...";
 
     const scrollUp = () => {
@@ -26,9 +26,9 @@ const BlogCard = ({ blog }) => {
                     <h2 className="card-title text-2xl lg:text-4xl">{title}</h2>
                     <p className=" font-semibold">By: {user_name}</p>
                     <p>{shortDes}</p>
-                    
+
                     <div className="card-actions justify-end">
-                        <Link onClick={scrollUp} className="btn bg-orange-500 text-white">Read More</Link>
+                        <Link to={`/blogDetails/${_id}`} onClick={scrollUp} className="btn bg-orange-500 text-white">Read More</Link>
                     </div>
                 </div>
             </div>
