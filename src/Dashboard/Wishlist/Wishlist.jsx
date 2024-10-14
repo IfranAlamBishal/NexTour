@@ -54,7 +54,7 @@ const Wishlist = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 const email = user.email;
-                axiosSecure.delete(`/remove_from_wishlist?email=${email}&tourId=${tour._id}`)
+                axiosSecure.delete(`/remove_from_wishlist?email=${email}&tourId=${tour._id}&packageType=${tour.packageType}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch();

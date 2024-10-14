@@ -35,7 +35,7 @@ const AvailableTours = () => {
 
     const handleSearch = e => {
         e.preventDefault();
-        const searching = e.target.search.value
+        const searching = e.target.search.value;
         setSearchedValue(searching.toLowerCase());
     }
 

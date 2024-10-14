@@ -55,14 +55,14 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/wishlish", async(req,res) => {
+    app.get("/wishlish", async (req, res) => {
       const email = req.query.email;
-      const query = { email: email};
+      const query = { email: email };
       const userWishlist = await wishlistCollection.findOne(query);
       res.send(userWishlist);
     });
 
-    app.get("/all_blogs", async(req,res) => {
+    app.get("/all_blogs", async (req, res) => {
       const result = await blogsCollection.find().toArray();
       res.send(result);
     });
@@ -121,14 +121,19 @@ async function run() {
 
     // Delete Operation 
 
-    app.delete("/remove_from_wishlist", async(req,res) => {
-      const {email, tourId} = req.query;
+    app.delete("/remove_from_wishlist", async (req, res) => {
+      const { email, tourId, packageType } = req.query;
 
-      if(email && tourId){
+      if (email && tourId && packageType) {
         const result = await wishlistCollection.updateOne(
           { email: email },
           {
-            $pull: { wishlist: { tourId: tourId } },
+            $pull: {
+              wishlist: {
+                tourId: tourId,
+                packageType: packageType
+              }
+            },
           }
         );
 
