@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-neutral text-neutral-content p-10">
+            <footer className="footer bg-orange-500 text-white p-10">
                 <aside>
                     <p className=" text-5xl font-bold">
                         NexTour Ltd.
@@ -22,7 +22,7 @@ const Footer = () => {
                     </p>
                 </aside>
                 <nav>
-                    <h6 className="footer-title">Find Us</h6>
+                    <h6 className="footer-title opacity-100">Find Us</h6>
                     <div className="grid grid-flow-col gap-4">
                         <Link to='https://www.facebook.com/'>
                             <img src={fb} alt="facebook" className=" bg-white rounded-full w-8 h-8 p-1"/>
