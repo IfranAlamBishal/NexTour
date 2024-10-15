@@ -18,6 +18,10 @@ import BookedTours from "../Dashboard/BookedTours/BookedTours";
 import UserReviews from "../Dashboard/UserReviews/UserReviews";
 import UserBlogs from "../Dashboard/UserBlogs/UserBlogs";
 import BlogDetails from "../Pages/Blogs/BLogDetails";
+import AllUsers from "../Dashboard/AdminRoutes/AllUsers/AllUsers";
+import AllTours from "../Dashboard/AdminRoutes/AllTours/AllTours";
+import AllBookings from "../Dashboard/AdminRoutes/AllBookings/AllBookings";
+import AllBlogs from "../Dashboard/AdminRoutes/AllBlogs/AllBlogs";
 
 
 export const router = createBrowserRouter([
@@ -70,6 +74,8 @@ export const router = createBrowserRouter([
         path: "profile",
         element: <Profile/>,
       },
+
+      // User Routes
       {
         path: "wishlist",
         element: <Wishlist/>,
@@ -85,7 +91,25 @@ export const router = createBrowserRouter([
       {
         path: "user_blogs",
         element: <UserBlogs/>,
-      }
+      },
+
+      // Admin Routes
+      {
+        path: "allUsers",
+        element: <AllUsers/>,
+      },
+      {
+        path: "allTours",
+        element: <AllTours/>,
+      },
+      {
+        path: "allBookings",
+        element: <AllBookings/>,
+      },
+      {
+        path: "allBlogs",
+        element: <AllBlogs/>,
+      },
     ]
   }
 ]);

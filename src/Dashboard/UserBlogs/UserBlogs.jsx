@@ -45,7 +45,7 @@ const UserBlogs = () => {
                                 text: "You've successfully removed the blog.",
                                 icon: "success"
                             });
-                            
+
                         }
                     })
 
@@ -67,13 +67,13 @@ const UserBlogs = () => {
             }
             axiosSecure.post('/add_blog', newBlog)
                 .then(res => {
-                    if (res.data.insertedId > 0) {
+                    if (res.data.insertedId) {
+                        e.target.reset();
                         Swal.fire({
                             title: "Added!",
                             text: "You've successfully added a new blog.",
                             icon: "success"
                         });
-                        e.target.reset();
                     }
 
                 })
@@ -107,14 +107,15 @@ const UserBlogs = () => {
                     ></SectionHeader>
 
                     <div className=" w-5/6 mx-auto my-20">
+
+                        <div className=" flex flex-col md:flex-row justify-between gap-5">
+                            <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Blogs: {userBlogs.length} </h1>
+
+                            <label htmlFor="my_modal_6" className=" btn bg-orange-500 text-white my-auto w-40 text-base">Write New Blog</label>
+                        </div>
                         {
                             userBlogs.length > 0 ?
                                 <>
-                                    <div className=" flex flex-col md:flex-row justify-between gap-5">
-                                        <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Blogs: {userBlogs.length} </h1>
-
-                                        <label htmlFor="my_modal_6" className=" btn bg-orange-500 text-white my-auto w-40 text-base">Write New Blog</label>
-                                    </div>
 
                                     {/* Table */}
                                     <div className="overflow-x-auto  my-5">

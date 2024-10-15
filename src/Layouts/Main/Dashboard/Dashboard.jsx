@@ -1,13 +1,32 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Dashboard = () => {
 
+    const isAdmin = useAdmin();
+
+
     const dashLinks = <ul className=" menu px-1 space-y-2 text-lg font-medium">
         <li><NavLink to='/dashboard/profile'>Profile</NavLink></li>
-        <li><NavLink to='/dashboard/wishlist'>Wishlist</NavLink></li>
-        <li><NavLink to='/dashboard/bookedTours'>Booked</NavLink></li>
-        <li><NavLink to='/dashboard/user_reviews'>My Reviews</NavLink></li>
-        <li><NavLink to='/dashboard/user_blogs'>My Blogs</NavLink></li>
+
+        {
+            isAdmin ?
+                <>
+                    <li><NavLink to='/dashboard/allUsers'>All Users</NavLink></li>
+                    <li><NavLink to='/dashboard/allTours'>All Tours</NavLink></li>
+                    <li><NavLink to='/dashboard/allBookings'>All Bookings</NavLink></li>
+                    <li><NavLink to='/dashboard/allBlogs'>All Blogs</NavLink></li>
+                </>
+                :
+                <>
+                    <li><NavLink to='/dashboard/wishlist'>Wishlist</NavLink></li>
+                    <li><NavLink to='/dashboard/bookedTours'>Booked</NavLink></li>
+                    <li><NavLink to='/dashboard/user_reviews'>My Reviews</NavLink></li>
+                    <li><NavLink to='/dashboard/user_blogs'>My Blogs</NavLink></li>
+                </>
+        }
+
+
     </ul>
 
 
