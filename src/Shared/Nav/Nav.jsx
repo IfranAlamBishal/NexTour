@@ -9,11 +9,18 @@ const Nav = () => {
 
     const {user, logOut} = useContext(AuthContext);
 
+    const scrollUp = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
+
     const navLinks = <>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/tours'>Tours</NavLink></li>
-        <li><NavLink to='/blogs'>Blog</NavLink></li>
-        <li><NavLink to='/contacts'>Contact Us</NavLink></li>
+        <li><NavLink onClick={scrollUp} to='/'>Home</NavLink></li>
+        <li><NavLink onClick={scrollUp} to='/tours'>Tours</NavLink></li>
+        <li><NavLink onClick={scrollUp} to='/blogs'>Blog</NavLink></li>
+        <li><NavLink onClick={scrollUp} to='/contacts'>Contact Us</NavLink></li>
     </>
 
 const handleLogOut = () => {
@@ -81,7 +88,7 @@ const handleLogOut = () => {
                             {loginBtn}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-2xl md:text-3xl lg:text-4xl font-bold gap-0"><span className=" text-orange-500">Nex</span>Tour</Link>
+                    <Link to='/' onClick={scrollUp} className="btn btn-ghost text-2xl md:text-3xl lg:text-4xl font-bold gap-0"><span className=" text-orange-500">Nex</span>Tour</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 font-semibold text-lg">

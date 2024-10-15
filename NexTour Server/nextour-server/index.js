@@ -125,6 +125,12 @@ async function run() {
 
     });
 
+    app.post("/add_blog", async (req, res) => {
+      const newBlog = req.body;
+      const result = await blogsCollection.insertOne(newBlog);
+      res.send(result);
+    });
+
 
     // Delete Operation 
 
@@ -146,7 +152,19 @@ async function run() {
 
         res.send(result);
       }
-    })
+    });
+
+
+    app.delete("/remove_blog", async (req, res) => {
+      const id = req.query;
+
+      if (id) {
+        const query = { _id: new ObjectId(id) };
+        const result = await blogsCollection.deleteOne(query);
+        res.send(result);
+      }
+
+    });
 
 
     // Send a ping to confirm a successful connection

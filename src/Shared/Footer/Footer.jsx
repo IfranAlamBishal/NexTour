@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-orange-500 text-white p-10">
+            <footer className="footer bg-gradient-to-r from-orange-500 to-orange-300 text-white p-10">
                 <aside>
                     <p className=" text-5xl font-bold">
                         NexTour Ltd.

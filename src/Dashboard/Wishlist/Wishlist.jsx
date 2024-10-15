@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Wishlist = () => {
 
@@ -139,7 +140,7 @@ const Wishlist = () => {
                                                     <td className=" font-semibold">{tour.average_cost}</td>
                                             }
                                             <td><Link className=" btn bg-orange-500 text-white">Book Now</Link></td>
-                                            <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white">Remove</Link></td>
+                                            <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                         </tr>)
                                     }

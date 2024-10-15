@@ -2,7 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
 
-    const dashLinks = <ul className=" menu px-1 space-y-2 max-w-56 text-lg font-medium">
+    const dashLinks = <ul className=" menu px-1 space-y-2 text-lg font-medium">
         <li><NavLink to='/dashboard/profile'>Profile</NavLink></li>
         <li><NavLink to='/dashboard/wishlist'>Wishlist</NavLink></li>
         <li><NavLink to='/dashboard/bookedTours'>Booked</NavLink></li>
@@ -19,7 +19,7 @@ const Dashboard = () => {
                 <hr className=" w-2/3 mx-auto my-5 border-2 border-black" />
                 <Link to='/' className=" ml-3">Home</Link>
             </div>
-            <div className=" flex-1">
+            <div className=" flex-1 p-5">
                 <Outlet></Outlet>
             </div>
         </div>
