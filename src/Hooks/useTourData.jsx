@@ -5,7 +5,7 @@ const useTourData = () => {
 
     const axiosSecure = useAxios();
 
-    const {data: tourData = []} = useQuery({
+    const {refetch, data: tourData = []} = useQuery({
         queryKey: ['tourData'],
         queryFn: async () => {
             const res = await axiosSecure.get('/tours')
@@ -13,7 +13,7 @@ const useTourData = () => {
         }
     })
     
-    return tourData;
+    return [tourData, refetch];
 };
 
 export default useTourData;
