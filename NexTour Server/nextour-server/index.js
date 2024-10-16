@@ -61,15 +61,15 @@ async function run() {
       const user = await userCollection.findOne(query);
       let admin = false;
       if (user) {
-          admin = user.role === 'admin';
+        admin = user.role === 'admin';
       }
       res.send({ admin });
-  });
+    });
 
     app.get("/wishlish", async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
-      const userWishlist = await wishlistCollection.findOne(query);
+      const userWishlist = await wishlistCollection.find(query).toArray();
       res.send(userWishlist);
     });
 
@@ -92,48 +92,26 @@ async function run() {
       const user = req.body;
       const result = await userCollection.insertOne(user);
       res.send(result);
-    })
+    });
 
     app.post("/add_to_wishlist", async (req, res) => {
-      const { email, tourId, packageType } = req.body;
-
-      if (!email || !tourId || !packageType) {
-        return res.status(400).send('Email, Tour ID, and Package Type are required');
+      const { email, tourId, packageType } = req.body
+      const alreadyOnList = await wishlistCollection.findOne({
+        email: email,
+        tourId: tourId,
+        packageType: packageType
+      });
+      if (!alreadyOnList) {
+        await wishlistCollection.insertOne({
+          email: email,
+          tourId: tourId,
+          packageType: packageType
+        });
+        return res.status(201).send('Wishlist created and tour with package added');
       }
-      try {
-        // Check if the wishlist for this user exists
-        const userWishlist = await wishlistCollection.findOne({ email });
-
-        const newWishlistItem = { tourId, packageType };
-
-        if (userWishlist) {
-          // If the wishlist exists, check if the tour is already there
-          const alreadyInWishlist = userWishlist.wishlist.some(
-            (item) => item.tourId === tourId && item.packageType === packageType
-          );
-
-          if (!alreadyInWishlist) {
-            await wishlistCollection.updateOne(
-              { email },
-              { $push: { wishlist: newWishlistItem } }
-            );
-            return res.status(200).send('Tour with package added to wishlist');
-          } else {
-            return res.status(400).send('Tour with this package is already in the wishlist');
-          }
-        } else {
-          // If no wishlist exists, create a new one
-          await wishlistCollection.insertOne({
-            email,
-            wishlist: [newWishlistItem]
-          });
-          return res.status(201).send('Wishlist created and tour with package added');
-        }
-      } catch (error) {
-        console.error('Error adding to wishlist:', error);
-        res.status(500).send('Internal server error');
+      else {
+        return res.status(400).send('Tour with this package is already in the wishlist');
       }
-
     });
 
     app.post("/add_blog", async (req, res) => {
@@ -149,16 +127,12 @@ async function run() {
       const { email, tourId, packageType } = req.query;
 
       if (email && tourId && packageType) {
-        const result = await wishlistCollection.updateOne(
-          { email: email },
+        const result = await wishlistCollection.deleteOne(
           {
-            $pull: {
-              wishlist: {
-                tourId: tourId,
-                packageType: packageType
-              }
-            },
-          }
+            email: email,
+            tourId: tourId,
+            packageType: packageType
+        }
         );
 
         res.send(result);

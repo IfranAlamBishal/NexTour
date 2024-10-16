@@ -14,30 +14,30 @@ const Wishlist = () => {
     const [wishlist, setWishlist] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userWishlist, refetch] = useWishlist();
-    const tourData = useTourData();
+    const [tourData] = useTourData();
     const axiosSecure = useAxios();
     const { user } = useContext(AuthContext);
 
+
     useEffect(() => {
         if (userWishlist && tourData) {
-
-            const tourIDs = userWishlist.wishlist;
-
-            if (tourIDs && tourIDs.length > 0) {
-                const wishlistDetails = tourIDs.map(item => {
-                    const tourDetail = tourData.find(tour => tour._id === item.tourId);
+            const wishlistDetails = userWishlist.map(({ tourId, packageType }) => {
+                const tourDetails = tourData.find(tour => tour._id === tourId);
+                if (tourDetails) {
                     return {
-                        ...tourDetail,
-                        packageType: item.packageType
-                    }
-                })
+                        ...tourDetails,
+                        packageType
+                    };
+                }
+            })
                 setWishlist(wishlistDetails);
-            }
-
-            setLoading(false);
 
         }
-    }, [userWishlist, tourData])
+        setLoading(false);
+
+
+    }, [userWishlist, tourData]);
+
 
     const handleRemove = tour => {
         Swal.fire({
@@ -53,7 +53,7 @@ const Wishlist = () => {
                 const email = user.email;
                 axiosSecure.delete(`/remove_from_wishlist?email=${email}&tourId=${tour._id}&packageType=${tour.packageType}`)
                     .then(res => {
-                        if (res.data.modifiedCount > 0) {
+                        if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire({
                                 title: "Removed!",
@@ -66,6 +66,7 @@ const Wishlist = () => {
             }
         })
     }
+
 
 
     if (loading) {
@@ -98,7 +99,7 @@ const Wishlist = () => {
         );
     }
 
-    else {
+    if (wishlist.length > 0) {
         return (
             <div>
                 <Helmet>
@@ -128,7 +129,7 @@ const Wishlist = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        wishlist.map((tour, index) => <tr key={tour._id} className=" text-base">
+                                        wishlist.map((tour, index) => tour ? <tr key={tour._id} className=" text-base">
                                             <th>{index + 1}</th>
                                             <td>{tour.tourists_spot_name}</td>
                                             <td>{tour.packageType}</td>
@@ -142,8 +143,8 @@ const Wishlist = () => {
                                             <td><Link className=" btn bg-orange-500 text-white">Book Now</Link></td>
                                             <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
-                                        </tr>)
-                                    }
+                                        </tr> : null
+                                        )}
                                 </tbody>
                             </table>
                         </div>
