@@ -39,7 +39,7 @@ const Register = () => {
                         Swal.fire({
                             icon: "error",
                             title: "Oops !",
-                            text: error.massage,
+                            text: error.message,
                         });
                     })
 
@@ -49,7 +49,7 @@ const Register = () => {
                 Swal.fire({
                     icon: "error",
                     title: "Oops !",
-                    text: error.massage,
+                    text: error.message,
                 });
             })
     };

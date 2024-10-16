@@ -77,7 +77,7 @@ const WhyNexTour = () => {
                                 <label className="label">
                                     <span className="label-text">Massage</span>
                                 </label>
-                                <textarea type="text" placeholder="massage" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="message" required />
+                                <textarea type="text" placeholder="message" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="message" required />
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn bg-orange-500 text-white">Send</button>

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import useUserData from "../../../Hooks/useUserData";
 import SectionHeader from "../../../Shared/SectionHeader/SectionHeader";
 import { Link } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaSearch, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxios from "../../../Hooks/useAxios";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
@@ -15,6 +15,7 @@ const AllUsers = () => {
     const [allUsers, setAllUsers] = useState([]);
     const axiosSecure = useAxios();
     const { user } = useContext(AuthContext);
+    const [searchedValue, setSearchedValue] = useState('');
 
     useEffect(() => {
         if (users) {
@@ -22,6 +23,7 @@ const AllUsers = () => {
         }
         setLoading(false);
     }, [users])
+
 
     const handleRemove = removingUser => {
         Swal.fire({
@@ -79,6 +81,21 @@ const AllUsers = () => {
 
 
 
+    const handleSearch = e => {
+        e.preventDefault();
+        const searching = e.target.search.value;
+        setSearchedValue(searching.toLowerCase());
+    }
+
+    const availableUsers = allUsers.filter(user => {
+        const matchedSearch = user.name.toLowerCase().includes(searchedValue) ||
+            user.email.toLowerCase().includes(searchedValue);
+
+        return matchedSearch;
+    })
+
+
+
     if (loading) {
         return (
             <div className="text-center">
@@ -102,7 +119,16 @@ const AllUsers = () => {
                     ></SectionHeader>
 
                     <div className=" w-5/6 mx-auto my-20">
-                        <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Users: {allUsers.length} </h1>
+                        <div className=" flex flex-col md:flex-row justify-between gap-5">
+                            <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Users: {allUsers.length} </h1>
+
+                            {/* search */}
+
+                            <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg mx-auto my-5">
+                                <input type="text" placeholder="user name or email" className="input input-bordered w-full max-w-md" name="search" />
+                                <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
+                            </form>
+                        </div>
 
                         {/* Table */}
                         <div className="overflow-x-auto  my-5">
@@ -119,7 +145,7 @@ const AllUsers = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        allUsers.map((user, index) => user ? <tr key={user._id} className=" text-base">
+                                        availableUsers.map((user, index) => user ? <tr key={user._id} className=" text-base">
                                             <th>{index + 1}</th>
                                             <td>{user.name}</td>
                                             <td>{user.email}</td>

@@ -86,7 +86,11 @@ async function run() {
       res.send(blog);
     });
 
-  
+    app.get("/blockedUsers", async (req, res) => {
+      const result = await blockedUsersCollection.find().toArray();
+      res.send(result);
+    });
+
 
 
     // Post Operations
@@ -123,7 +127,7 @@ async function run() {
       res.send(result);
     });
 
-    app.post("/add_to_blocklist", async(req,res) => {
+    app.post("/add_to_blocklist", async (req, res) => {
       const blockedUser = req.body;
       const result = await blockedUsersCollection.insertOne(blockedUser);
       res.send(result);
@@ -141,7 +145,7 @@ async function run() {
             email: email,
             tourId: tourId,
             packageType: packageType
-        }
+          }
         );
 
         res.send(result);
@@ -160,10 +164,10 @@ async function run() {
 
     });
 
-    app.delete("/remove_user", async(req,res) => {
+    app.delete("/remove_user", async (req, res) => {
       const id = req.query;
-      
-      if(id){
+
+      if (id) {
         const query = { _id: new ObjectId(id) };
         const result = await userCollection.deleteOne(query);
         res.send(result);
