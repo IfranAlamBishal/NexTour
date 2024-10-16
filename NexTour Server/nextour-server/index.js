@@ -34,6 +34,7 @@ async function run() {
     const userCollection = client.db('NexTourDB').collection('UserCollection');
     const wishlistCollection = client.db('NexTourDB').collection('WishlistCollection');
     const blogsCollection = client.db('NexTourDB').collection('BlogsCollection');
+    const blockedUsersCollection = client.db('NexTourDB').collection('BlockedUsers');
 
 
     // Get Operations
@@ -85,6 +86,8 @@ async function run() {
       res.send(blog);
     });
 
+  
+
 
     // Post Operations
 
@@ -120,6 +123,12 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/add_to_blocklist", async(req,res) => {
+      const blockedUser = req.body;
+      const result = await blockedUsersCollection.insertOne(blockedUser);
+      res.send(result);
+    })
+
 
     // Delete Operation 
 
@@ -150,6 +159,16 @@ async function run() {
       }
 
     });
+
+    app.delete("/remove_user", async(req,res) => {
+      const id = req.query;
+      
+      if(id){
+        const query = { _id: new ObjectId(id) };
+        const result = await userCollection.deleteOne(query);
+        res.send(result);
+      }
+    })
 
 
     // Send a ping to confirm a successful connection

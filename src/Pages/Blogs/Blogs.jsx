@@ -10,6 +10,14 @@ const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [blogsData] = useBlogsData();
     const [searchedValue, setSearchedValue] = useState('');
+    const [spinner, setSpinner] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setSpinner(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         if (blogsData && blogsData.length > 0) {
@@ -27,9 +35,9 @@ const Blogs = () => {
 
     const availableBlogs = blogs.filter(blog => {
         const matchedSearch = blog.title.toLowerCase().includes(searchedValue) ||
-        blog.user_name.toLowerCase().includes(searchedValue);
+            blog.user_name.toLowerCase().includes(searchedValue);
 
-        return matchedSearch ;
+        return matchedSearch;
     })
 
 
@@ -44,6 +52,12 @@ const Blogs = () => {
                     <h1 className=" text-4xl md:text-6xl font-bold text-white w-40 md:w-60 mx-auto text-center bg-black bg-opacity-40 p-5 rounded-xl">Blogs</h1>
                 </div>
                 <div className=" w-5/6 mx-auto my-10">
+
+                    <div className=" flex justify-center">
+                        {
+                            spinner && <span className="loading loading-infinity w-36 text-orange-500"></span>
+                        }
+                    </div>
 
                     {/* search */}
 

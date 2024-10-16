@@ -150,7 +150,7 @@ const UserBlogs = () => {
                     </div>
                 </div>
 
-                {/* Modal for update profile */}
+                {/* Modal for write new Blog */}
 
                 <input type="checkbox" id="my_modal_6" className="modal-toggle" />
                 <div className="modal" role="dialog">
