@@ -133,6 +133,12 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/add_new_spot", async(req,res) => {
+      const newSpot = req.body;
+      const result = await tourData.insertOne(newSpot);
+      res.send(result);
+    });
+
 
 
     // Put/Patch Operations
@@ -149,7 +155,7 @@ async function run() {
         const result = await userCollection.updateOne(id, updatedRole);
         res.send(result);
       }
-    })
+    });
 
 
     // Delete Operation 

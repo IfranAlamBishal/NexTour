@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useTourData from "../../../Hooks/useTourData";
 import SectionHeader from "../../../Shared/SectionHeader/SectionHeader";
+import { FaSearch, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const AllTours = () => {
 
     const [loading, setLoading] = useState(true);
     const [tourData] = useTourData();
     const [allTours, setAllTours] = useState([]);
+    const [searchedValue, setSearchedValue] = useState('');
+    const axiosSecure = useAxios();
 
     useEffect(() => {
         if (tourData) {
@@ -17,22 +23,72 @@ const AllTours = () => {
     }, [tourData])
 
 
+    const handleSearch = e => {
+        e.preventDefault();
+        const searching = e.target.search.value;
+        setSearchedValue(searching.toLowerCase());
+    }
+
+    const availableSpots = allTours.filter(tour => {
+
+        const matchedSearch = tour.tourists_spot_name.toLowerCase().includes(searchedValue) || tour.country_Name.toLowerCase().includes(searchedValue);
+
+        return matchedSearch;
+    });
+
+
+    const addNewSpot = e => {
+        e.preventDefault();
+
+        const newSpot = {
+            image: e.target.photo.value,
+            tourists_spot_name: e.target.spot_name.value,
+            country_Name: e.target.country_name.value,
+            location: e.target.location.value,
+            short_description: e.target.description.value,
+            rating: e.target.rating.value,
+            travel_time: e.target.duration.value,
+            totalVisitorsPerYear: e.target.totalVisitorsPerYear.value,
+            average_cost: e.target.regular_cost.value
+        }
+
+        axiosSecure.post('/add_new_spot', newSpot)
+            .then(res => {
+                if (res.data.insertedId) {
+                    e.target.reset();
+                    Swal.fire({
+                        title: "Added!",
+                        text: "You've successfully added a new Spot.",
+                        icon: "success"
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops !",
+                    text: error.message,
+                });
+            })
+    }
+
+
     if (loading) {
         return (
             <div className="text-center">
                 <Helmet>
-                    <title>NexTour | My Blogs</title>
+                    <title>NexTour | All Tours</title>
                 </Helmet>
                 <span className="loading loading-infinity w-36 text-orange-500"></span>
             </div>
         );
     }
 
-    else{
-        return(
+    else {
+        return (
             <div>
                 <Helmet>
-                    <title>NexTour | My Blogs</title>
+                    <title>NexTour | All Tours</title>
                 </Helmet>
                 <div>
                     <SectionHeader
@@ -40,7 +96,146 @@ const AllTours = () => {
                     ></SectionHeader>
 
                     <div className=" w-5/6 mx-auto my-20">
-                    <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Tours: {allTours.length} </h1>
+                        <div className=" flex flex-col md:flex-row justify-between gap-5">
+                            <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Tours: {availableSpots.length} </h1>
+
+                            {/* search */}
+
+                            <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg mx-auto my-5">
+                                <input type="text" placeholder="spot or country name" className="input input-bordered w-full max-w-md" name="search" />
+                                <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
+                            </form>
+
+                            {/* Write Blog Btn */}
+
+                            <label htmlFor="my_modal_6" className=" btn bg-orange-500 text-white my-auto w-40 text-base">Add New Spot</label>
+                        </div>
+
+                        {/* Table */}
+                        <div className="overflow-x-auto  my-5">
+                            <table className="table table-zebra">
+                                <thead>
+                                    <tr className=" bg-orange-500 text-white text-base">
+                                        <th></th>
+                                        <th>Spot Name</th>
+                                        <th>Country</th>
+                                        <th>Regular Price</th>
+                                        <th>Premium Price</th>
+                                        <th className=" opacity-0">update</th>
+                                        <th className=" opacity-0">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        availableSpots.map((tour, index) => tour ? <tr key={tour._id} className=" text-base">
+                                            <th>{index + 1}</th>
+                                            <td className=" font-semibold">{tour.tourists_spot_name}</td>
+                                            <td>{tour.country_Name}</td>
+                                            <td className=" font-semibold">{tour.average_cost}</td>
+                                            <td className=" font-semibold">{tour.average_cost * 1.5}</td>
+                                            <td><label className=" btn bg-orange-500 text-white">Update</label></td>
+                                            <td><Link className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
+
+                                        </tr> : null
+                                        )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Modal for write new Blog */}
+
+                <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+                <div className="modal" role="dialog">
+                    <div className="modal-box max-w-2xl">
+
+                        <h1 className=" text-center text-3xl font-semibold text-orange-500 mb-5">Add New Spot</h1>
+
+                        <div>
+                            <form onSubmit={addNewSpot} className="card-body p-4">
+
+                                <div className=" flex flex-col md:flex-row justify-between gap-3">
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Spot Name</span>
+                                        </label>
+                                        <input type="text" placeholder="spot name" className="input input-bordered" name="spot_name" required />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Location</span>
+                                        </label>
+                                        <input type="text" placeholder="location" className="input input-bordered" name="location" required />
+                                    </div>
+                                </div>
+
+                                <div className=" flex flex-col md:flex-row justify-between gap-3">
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Country Name</span>
+                                        </label>
+                                        <input type="text" placeholder="country name" className="input input-bordered" name="country_name" required />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Duration</span>
+                                        </label>
+                                        <input type="number" min="0" max="10" placeholder="duration" className="input input-bordered" name="duration" required />
+                                    </div>
+                                </div>
+
+                                <div className=" flex flex-col md:flex-row justify-between gap-3">
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Regular Cost</span>
+                                        </label>
+                                        <input type="number" min="0" placeholder="regular cost" className="input input-bordered" name="regular_cost" required />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Premium Cost</span>
+                                        </label>
+                                        <input type="number" min="0" placeholder="premium cost" className="input input-bordered" name="premium_cost" />
+                                    </div>
+                                </div>
+
+                                <div className=" flex flex-col md:flex-row justify-between gap-3">
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Rating</span>
+                                        </label>
+                                        <input type="number" min="0" max="5" placeholder="rating" className="input input-bordered" name="rating" required />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">Total Visitor Per Year</span>
+                                        </label>
+                                        <input type="number" min="0" placeholder="total visitor per year" className="input input-bordered" name="totalVisitorsPerYear" />
+                                    </div>
+                                </div>
+
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Photo URL</span>
+                                    </label>
+                                    <input type="url" placeholder="photo url" className="input input-bordered" name="photo" required />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Description</span>
+                                    </label>
+                                    <textarea type="text" placeholder="description" className="textarea textarea-bordered textarea-lg w-full max-w-sm" name="description" required />
+                                </div>
+                                <div className="card-actions justify-end mt-4">
+                                    <button className="btn bg-orange-500 text-white">Add</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div className="modal-action">
+                            <label htmlFor="my_modal_6" className="btn">Close!</label>
+                        </div>
                     </div>
                 </div>
             </div>

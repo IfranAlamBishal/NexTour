@@ -77,6 +77,13 @@ const UserBlogs = () => {
                     }
 
                 })
+                .catch(error => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops !",
+                        text: error.message,
+                    });
+                })
         }
     }
 
@@ -110,6 +117,8 @@ const UserBlogs = () => {
 
                         <div className=" flex flex-col md:flex-row justify-between gap-5">
                             <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Blogs: {userBlogs.length} </h1>
+
+                            {/* Write Blog Btn */}
 
                             <label htmlFor="my_modal_6" className=" btn bg-orange-500 text-white my-auto w-40 text-base">Write New Blog</label>
                         </div>

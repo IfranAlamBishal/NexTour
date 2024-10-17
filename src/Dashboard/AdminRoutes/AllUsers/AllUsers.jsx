@@ -181,7 +181,7 @@ const AllUsers = () => {
 
                     <div className=" w-5/6 mx-auto my-20">
                         <div className=" flex flex-col md:flex-row justify-between gap-5">
-                            <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Users: {allUsers.length} </h1>
+                            <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Users: {availableUsers.length} </h1>
 
                             {/* search */}
 
