@@ -6,6 +6,7 @@ import { FaShareNodes } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const TourDetailsPage = () => {
 
@@ -14,6 +15,7 @@ const TourDetailsPage = () => {
     const axiosSecure = useAxios();
     const [spinner, setSpinner] = useState(true);
     const { user } = useContext(AuthContext);
+    const isAdmin = useAdmin();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,6 +44,13 @@ const TourDetailsPage = () => {
                 text: "Please log in first to continue.",
             });
             navigate('/login');
+        }
+        else if (isAdmin) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops !",
+                text: "Admin Can't add any package on wishlist.",
+            });
         }
         else {
             Swal.fire({
