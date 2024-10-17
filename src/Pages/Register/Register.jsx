@@ -9,6 +9,7 @@ import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
 import useUserData from "../../Hooks/useUserData";
+import useBlockedUser from "../../Hooks/useBlockedUser";
 
 const Register = () => {
 
@@ -18,8 +19,10 @@ const Register = () => {
     const navigate = useNavigate();
     const axiosSecure = useAxios();
     const [users] = useUserData();
+    const blockedUsers = useBlockedUser();
 
     const onSubmit = data => {
+
         createUser(data.email, data.password)
             .then((userCredential) => {
                 updateName(data.name);
@@ -56,43 +59,59 @@ const Register = () => {
 
 
     const handleGoogleLogIn = () => {
-        googleLogIn()
-            .then((result) => {
-                const alreadyUser = users.filter(user => user.email == result.user.email)
-                if (alreadyUser.length == 0) {
-                    const user = {
-                        name: result.user.displayName,
-                        email: result.user.email,
-                        role: 'user'
+        if (blockedUsers) {
+            googleLogIn()
+                .then((result) => {
+
+                    const blocked = blockedUsers.find(user => user.email == result.user.email);
+
+                    if (blocked) {
+                        logOut();
+                        Swal.fire({
+                            icon: "error",
+                            title: "Blocked !",
+                            text: "Your account has been blocked. Please contact us to recover your account.",
+                        });
                     }
-                    axiosSecure.post('/register', user)
-                        .then()
 
+                    else {
+                        const alreadyUser = users.filter(user => user.email == result.user.email)
+                        if (alreadyUser.length == 0) {
+                            const user = {
+                                name: result.user.displayName,
+                                email: result.user.email,
+                                role: 'user'
+                            }
+                            axiosSecure.post('/register', user)
+                                .then()
+
+                            Swal.fire({
+                                title: "Registered!",
+                                text: "You've successfully registered.",
+                                icon: "success"
+                            });
+                        }
+
+                        else {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Logged in!",
+                                text: "You have successfully logged in!",
+                            });
+                        }
+
+                        navigate('/')
+                    }
+
+                })
+                .catch(error => {
                     Swal.fire({
-                        title: "Registered!",
-                        text: "You've successfully registered.",
-                        icon: "success"
+                        icon: "error",
+                        title: "Oops !",
+                        text: error.message,
                     });
-                }
-
-                else {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Logged in!",
-                        text: "You have successfully logged in!",
-                    });
-                }
-
-                navigate('/')
-
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops !",
-                    text: error.massage,
-                });
-            })
+                })
+        }
     };
 
 

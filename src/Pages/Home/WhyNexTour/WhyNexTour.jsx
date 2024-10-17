@@ -75,7 +75,7 @@ const WhyNexTour = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Massage</span>
+                                    <span className="label-text">Message</span>
                                 </label>
                                 <textarea type="text" placeholder="message" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="message" required />
                             </div>

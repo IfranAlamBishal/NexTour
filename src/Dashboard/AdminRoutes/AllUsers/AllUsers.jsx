@@ -16,6 +16,7 @@ const AllUsers = () => {
     const axiosSecure = useAxios();
     const { user } = useContext(AuthContext);
     const [searchedValue, setSearchedValue] = useState('');
+    const [selectedUser, setSelecteduser] = useState({});
 
     useEffect(() => {
         if (users) {
@@ -79,6 +80,66 @@ const AllUsers = () => {
         })
     }
 
+
+    const handleUpdate = updatingUser => {
+        setSelecteduser(updatingUser);
+
+        document.getElementById("update_modal").checked = true;
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to remove this user?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, remove him/her!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                if (user.email == selectedUser.email) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Sorry !!",
+                        text: "Can't change own role!",
+                    });
+                }
+
+                // Update User Role
+                else {
+
+                    const updatedUser = {
+                        userId: selectedUser._id,
+                        newRole: e.target.newRole.value
+                    }
+
+                    axiosSecure.put('/update_role', updatedUser)
+                        .then(res => {
+                            if (res.data.modifiedCount > 0) {
+                                refetch();
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: "You've successfully updated the user role.",
+                                    icon: "success"
+                                });
+                            }
+                        })
+
+                        .catch(error => {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops !",
+                                text: error.message,
+                            });
+                        })
+                }
+            }
+        })
+
+    }
 
 
     const handleSearch = e => {
@@ -150,7 +211,7 @@ const AllUsers = () => {
                                             <td>{user.name}</td>
                                             <td>{user.email}</td>
                                             <td>{user.role}</td>
-                                            <td><Link className=" btn bg-orange-500 text-white">Update</Link></td>
+                                            <td><label onClick={() => handleUpdate(user)} className=" btn bg-orange-500 text-white">Update</label></td>
                                             <td><Link onClick={() => handleRemove(user)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                         </tr> : null
@@ -161,6 +222,49 @@ const AllUsers = () => {
 
                     </div>
                 </div>
+
+                {/* Modal for write new Blog */}
+
+                {
+                    selectedUser && <div>
+                        <input type="checkbox" id="update_modal" className="modal-toggle" />
+                        <div className="modal" role="dialog">
+                            <div className="modal-box">
+
+                                <div>
+                                    <h1 className=" text-3xl font-semibold mb-5">Update User Role</h1>
+                                    <h1 className="label-text text-xl font-semibold mb-3">Name: {selectedUser.name}</h1>
+                                    <h1 className="label-text text-xl font-semibold mb-3">Email: {selectedUser.email}</h1>
+                                    <form onSubmit={handleSubmit} className="card-body p-4">
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text text-xl font-semibold">Role</span>
+                                            </label>
+
+                                            <select
+                                                defaultValue={selectedUser.role}
+                                                name="newRole"
+                                                // onChange={handleRoleChange}
+                                                className="select select-bordered max-w-md mt-1"
+                                            >
+                                                <option value="user">User</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+
+                                        </div>
+                                        <div className="card-actions justify-end mt-4">
+                                            <button className="btn bg-orange-500 text-white">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div className="modal-action">
+                                    <label htmlFor="update_modal" className="btn">Close!</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         );
     }

@@ -131,6 +131,24 @@ async function run() {
       const blockedUser = req.body;
       const result = await blockedUsersCollection.insertOne(blockedUser);
       res.send(result);
+    });
+
+
+
+    // Put/Patch Operations
+
+    app.put("/update_role", async(req,res) => {
+      const {userId, newRole} = req.body;
+
+      if(userId && newRole) {
+        const id = { _id: new ObjectId(userId) };
+        const updatedRole = {
+          $set: {role: newRole},
+        };
+
+        const result = await userCollection.updateOne(id, updatedRole);
+        res.send(result);
+      }
     })
 
 

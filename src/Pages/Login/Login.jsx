@@ -31,108 +31,112 @@ const Login = () => {
     }
 
     const onSubmit = data => {
-        logIn(data.email, data.password)
-            .then((userCredential) => {
+        if (blockedUsers) {
+            logIn(data.email, data.password)
+                .then((userCredential) => {
 
-                const blocked = blockedUsers.find(user => user.email == userCredential.user.email);
+                    const blocked = blockedUsers.find(user => user.email == userCredential.user.email);
 
-                if (blocked) {
-                    logOut();
+                    if (blocked) {
+                        logOut();
+                        Swal.fire({
+                            icon: "error",
+                            title: "Blocked !",
+                            text: "Your account has been blocked. Please contact us to recover your account.",
+                        });
+                    }
+                    else {
+                        const checkUser = userCredential.user;
+
+                        if (checkUser.emailVerified) {
+                            const alreadyUser = users.filter(user => user.email == checkUser.email)
+
+                            if (alreadyUser.length == 0) {
+                                const user = {
+                                    name: checkUser.displayName,
+                                    email: checkUser.email,
+                                    role: 'user'
+                                }
+                                axiosSecure.post('/register', user)
+                                    .then()
+                            }
+                            Swal.fire({
+                                icon: "success",
+                                title: "Logged in!",
+                                text: "You have successfully logged in!",
+                            });
+                            navigate('/');
+                        }
+
+                        else {
+                            logOut();
+                            Swal.fire({
+                                icon: "error",
+                                title: "Not verified !",
+                                text: "Please verify your email first",
+                            });
+                        }
+                    }
+
+                })
+
+                .catch(error => {
                     Swal.fire({
                         icon: "error",
-                        title: "Blocked !",
-                        text: "Your account has been blocked. Please contact us to recover your account.",
+                        title: "Oops !",
+                        text: error.message,
                     });
-                }
-                else {
-                    const checkUser = userCredential.user;
 
-                    if (checkUser.emailVerified) {
-                        const alreadyUser = users.filter(user => user.email == checkUser.email)
+                })
+        }
 
+    };
+
+    const handleGoogleLogIn = () => {
+        if (blockedUsers) {
+            googleLogIn()
+                .then((result) => {
+
+                    const blocked = blockedUsers.find(user => user.email == result.user.email);
+
+                    if (blocked) {
+                        logOut();
+                        Swal.fire({
+                            icon: "error",
+                            title: "Blocked !",
+                            text: "Your account has been blocked. Please contact us to recover your account.",
+                        });
+                    }
+                    else {
+                        const alreadyUser = users.filter(user => user.email == result.user.email);
                         if (alreadyUser.length == 0) {
                             const user = {
-                                name: checkUser.displayName,
-                                email: checkUser.email,
+                                name: result.user.displayName,
+                                email: result.user.email,
                                 role: 'user'
                             }
                             axiosSecure.post('/register', user)
                                 .then()
                         }
+
                         Swal.fire({
                             icon: "success",
                             title: "Logged in!",
                             text: "You have successfully logged in!",
                         });
-                        navigate('/');
+
+                        navigate('/')
                     }
 
-                    else {
-                        logOut();
-                        Swal.fire({
-                            icon: "error",
-                            title: "Not verified !",
-                            text: "Please verify your email first",
-                        });
-                    }
-                }
-
-            })
-
-            .catch(error => {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops !",
-                    text: error.message,
-                });
-
-            })
-
-    };
-
-    const handleGoogleLogIn = () => {
-        googleLogIn()
-            .then((result) => {
-
-                const blocked = blockedUsers.find(user => user.email == result.user.email);
-
-                if (blocked) {
-                    logOut();
+                })
+                .catch(error => {
                     Swal.fire({
                         icon: "error",
-                        title: "Blocked !",
-                        text: "Your account has been blocked. Please contact us to recover your account.",
+                        title: "Oops !",
+                        text: error.message,
                     });
-                }
-                else {
-                    const alreadyUser = users.filter(user => user.email == result.user.email);
-                    if (alreadyUser.length == 0) {
-                        const user = {
-                            name: result.user.displayName,
-                            email: result.user.email,
-                            role: 'user'
-                        }
-                        axiosSecure.post('/register', user)
-                            .then()
-                    }
-
-                    Swal.fire({
-                        icon: "success",
-                        title: "Logged in!",
-                        text: "You have successfully logged in!",
-                    });
-
-                    navigate('/')
-                }
-
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops !",
-                    text: error.message,
-                });
-            })
+                })
+        }
     };
 
 
