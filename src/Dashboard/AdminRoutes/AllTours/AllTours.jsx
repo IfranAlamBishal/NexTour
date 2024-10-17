@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 const AllTours = () => {
 
     const [loading, setLoading] = useState(true);
-    const [tourData] = useTourData();
+    const [tourData, refetch] = useTourData();
     const [allTours, setAllTours] = useState([]);
     const [searchedValue, setSearchedValue] = useState('');
     const axiosSecure = useAxios();
@@ -71,6 +71,42 @@ const AllTours = () => {
                 });
             })
     }
+
+
+    const handleRemove = tour => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to remove this tour?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, remove it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/remove_tour?id=${tour._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Removed!",
+                                text: "You've successfully removed the tour.",
+                                icon: "success"
+                            });
+
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops !",
+                            text: error.message,
+                        });
+                    })
+            }
+        })
+    }
+
 
 
     if (loading) {
@@ -134,7 +170,7 @@ const AllTours = () => {
                                             <td className=" font-semibold">{tour.average_cost}</td>
                                             <td className=" font-semibold">{tour.average_cost * 1.5}</td>
                                             <td><label className=" btn bg-orange-500 text-white">Update</label></td>
-                                            <td><Link className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
+                                            <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                         </tr> : null
                                         )}

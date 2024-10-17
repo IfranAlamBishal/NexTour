@@ -196,6 +196,16 @@ async function run() {
         const result = await userCollection.deleteOne(query);
         res.send(result);
       }
+    });
+
+    app.delete("/remove_tour", async(req,res) => {
+      const id = req.query;
+
+      if (id) {
+        const query = { _id: new ObjectId(id) };
+        const result = await tourData.deleteOne(query);
+        res.send(result);
+      }
     })
 
 
