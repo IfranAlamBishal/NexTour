@@ -124,7 +124,8 @@ const AllBlogs = () => {
                 if (result.isConfirmed) {
                     const blogId = selectedBlog._id;
                     const approved = {
-                        status: "approved"
+                        status: "approved",
+                        approvedBy: user.displayName
                     }
 
                     axiosSecure.patch(`/approve_blog/${blogId}`, approved)
