@@ -157,6 +157,17 @@ async function run() {
       }
     });
 
+    app.patch('/update_tour/:id', async(req,res) => {
+      const tourId = req.params.id;
+      const updatedTour =  req.body;
+
+      if(tourId && updatedTour){
+        const id = { _id: new ObjectId(tourId) };
+        const result = await tourData.updateOne(id, { $set: updatedTour });
+        res.send(result);
+      }
+    })
+
 
     // Delete Operation 
 

@@ -91,12 +91,12 @@ const AllUsers = () => {
         e.preventDefault();
         Swal.fire({
             title: "Are you sure?",
-            text: "You want to remove this user?",
+            text: "You want to update the user role?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, remove him/her!"
+            confirmButtonText: "Yes, update it!"
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -223,7 +223,7 @@ const AllUsers = () => {
                     </div>
                 </div>
 
-                {/* Modal for write new Blog */}
+                {/* Modal for update user */}
 
                 {
                     selectedUser && <div>
