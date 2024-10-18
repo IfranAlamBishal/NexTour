@@ -28,10 +28,10 @@ const BlogDetails = () => {
 
     const { user_name, photo, title, description } = blogDetails;
 
-    console.log(blogDetails);
-
     return (
         <div className=" w-3/4 mx-auto min-h-screen py-28">
+
+
             <div className=" flex justify-center">
 
                 <Helmet>
@@ -41,25 +41,26 @@ const BlogDetails = () => {
                 {
                     spinner && <span className="loading loading-infinity w-36 text-orange-500"></span>
                 }
+            </div>
 
-                <div>
-                    <div className=" flex flex-1">
-                        <div className="card bg-white shadow-xl">
-                            <figure>
-                                <img
-                                    src={photo}
-                                    alt="spot"
-                                    className=" w-full h-64 md:h-[500px] object-cover" />
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title text-2xl lg:text-4xl">{title}</h2>
-                                <p className=" font-semibold">By: {user_name}</p>
-                                <p>{description}</p>
-                            </div>
+            <div>
+                <div className=" flex flex-1">
+                    <div className="card bg-white shadow-xl">
+                        <figure>
+                            <img
+                                src={photo}
+                                alt="spot"
+                                className=" w-full lg:min-w-[1140px] h-64 md:h-[500px] object-cover" />
+                        </figure>
+                        <div className="card-body">
+                            <h2 className="card-title text-2xl lg:text-4xl">{title}</h2>
+                            <p className=" font-semibold">By: {user_name}</p>
+                            <p>{description}</p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };

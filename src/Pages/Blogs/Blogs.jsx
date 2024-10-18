@@ -21,8 +21,9 @@ const Blogs = () => {
 
     useEffect(() => {
         if (blogsData && blogsData.length > 0) {
-            const approvedBlogs = blogsData.filter(blog => blog.status == 'approved')
-            setBlogs(approvedBlogs);
+            const approvedBlogs = blogsData.filter(blog => blog.status == 'approved');
+            const reverseBlogs= approvedBlogs.reverse();
+            setBlogs(reverseBlogs);
         }
 
     }, [blogsData])

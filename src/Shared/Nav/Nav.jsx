@@ -31,6 +31,7 @@ const handleLogOut = () => {
                 text: "You've successfully logged out.",
                 icon: "success"
             });
+            sessionStorage.clear();
         })
         .catch(error => {
             Swal.fire({

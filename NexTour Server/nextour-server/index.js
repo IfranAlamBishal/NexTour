@@ -166,8 +166,19 @@ async function run() {
         const result = await tourData.updateOne(id, { $set: updatedTour });
         res.send(result);
       }
-    })
+    });
 
+    app.patch('/approve_blog/:id', async(req,res) => {
+      const blogId = req.params.id;
+      const approved =  req.body;
+
+      if(blogId && approved){
+        const id = { _id: new ObjectId(blogId) };
+        const result = await blogsCollection.updateOne(id, { $set: approved });
+        res.send(result);
+      }
+    });
+    
 
     // Delete Operation 
 

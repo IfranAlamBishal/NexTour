@@ -69,7 +69,7 @@ const UserBlogs = () => {
                 photo: e.target.photo.value,
                 title: e.target.title.value,
                 description: e.target.description.value,
-                status: "Pending"
+                status: "pending"
             }
             axiosSecure.post('/add_blog', newBlog)
                 .then(res => {
