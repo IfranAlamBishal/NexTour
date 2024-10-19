@@ -22,6 +22,7 @@ import AllUsers from "../Dashboard/AdminRoutes/AllUsers/AllUsers";
 import AllTours from "../Dashboard/AdminRoutes/AllTours/AllTours";
 import AllBookings from "../Dashboard/AdminRoutes/AllBookings/AllBookings";
 import AllBlogs from "../Dashboard/AdminRoutes/AllBlogs/AllBlogs";
+import AdminRoutes from "./AdminRoutes/AdminRoutes";
 
 
 export const router = createBrowserRouter([
@@ -48,7 +49,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/blogDetails/:id",
-        element: <BlogDetails/>,
+        element: <BlogDetails />,
       },
       {
         path: "/contacts",
@@ -72,43 +73,43 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <Profile/>,
+        element: <Profile />,
       },
 
       // User Routes
       {
         path: "wishlist",
-        element: <Wishlist/>,
+        element: <Wishlist />,
       },
       {
         path: "bookedTours",
-        element: <BookedTours/>,
+        element: <BookedTours />,
       },
       {
         path: "user_reviews",
-        element: <UserReviews/>,
+        element: <UserReviews />,
       },
       {
         path: "user_blogs",
-        element: <UserBlogs/>,
+        element: <UserBlogs />,
       },
 
       // Admin Routes
       {
         path: "allUsers",
-        element: <AllUsers/>,
+        element: <AdminRoutes><AllUsers /></AdminRoutes>,
       },
       {
         path: "allTours",
-        element: <AllTours/>,
+        element: <AdminRoutes><AllTours /></AdminRoutes>,
       },
       {
         path: "allBookings",
-        element: <AllBookings/>,
+        element: <AdminRoutes><AllBookings /></AdminRoutes>,
       },
       {
         path: "allBlogs",
-        element: <AllBlogs/>,
+        element: <AdminRoutes><AllBlogs /></AdminRoutes>,
       },
     ]
   }
