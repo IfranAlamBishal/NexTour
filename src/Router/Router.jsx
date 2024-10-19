@@ -23,6 +23,7 @@ import AllTours from "../Dashboard/AdminRoutes/AllTours/AllTours";
 import AllBookings from "../Dashboard/AdminRoutes/AllBookings/AllBookings";
 import AllBlogs from "../Dashboard/AdminRoutes/AllBlogs/AllBlogs";
 import AdminRoutes from "./AdminRoutes/AdminRoutes";
+import BookingPage from "../Pages/BookingPage/bookingPage";
 
 
 export const router = createBrowserRouter([
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogDetails/:id",
         element: <BlogDetails />,
+      },
+      {
+        path:"/booking/:id/:packageType",
+        element: <ProtectedRoutes><BookingPage></BookingPage></ProtectedRoutes>
       },
       {
         path: "/contacts",

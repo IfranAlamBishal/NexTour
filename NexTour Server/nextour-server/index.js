@@ -35,6 +35,7 @@ async function run() {
     const wishlistCollection = client.db('NexTourDB').collection('WishlistCollection');
     const blogsCollection = client.db('NexTourDB').collection('BlogsCollection');
     const blockedUsersCollection = client.db('NexTourDB').collection('BlockedUsers');
+    const bookingCollection = client.db('NexTourDB').collection('BookingList');
 
 
     // Get Operations
@@ -138,6 +139,12 @@ async function run() {
       const result = await tourData.insertOne(newSpot);
       res.send(result);
     });
+
+    app.post("/add_to_bookingList", async(req,res) => {
+      const newBooked = req.body;
+      const result = await bookingCollection.insertOne(newBooked);
+      res.send(result);
+    })
 
 
 
