@@ -30,11 +30,9 @@ const Wishlist = () => {
                     };
                 }
             })
-                setWishlist(wishlistDetails);
-
+            setWishlist(wishlistDetails);
+            setLoading(false);
         }
-        setLoading(false);
-
 
     }, [userWishlist, tourData]);
 
@@ -81,25 +79,8 @@ const Wishlist = () => {
     }
 
 
-    if (wishlist.length == 0) {
-        return (
-            <div>
-                <Helmet>
-                    <title>NexTour | Wishlist</title>
-                </Helmet>
 
-                <div>
-                    <SectionHeader
-                        title='Wishlist'
-                    ></SectionHeader>
-
-                    <h1 className=" text-4xl font-semibold text-orange-500 text-center my-40"> Nothing is on your wishlist</h1>
-                </div>
-            </div>
-        );
-    }
-
-    if (wishlist.length > 0) {
+    else {
         return (
             <div>
                 <Helmet>
@@ -115,39 +96,44 @@ const Wishlist = () => {
                         <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Packages on Wishlist: {wishlist.length} </h1>
 
                         {/* Table */}
-                        <div className="overflow-x-auto  my-5">
-                            <table className="table table-zebra">
-                                <thead>
-                                    <tr className=" bg-orange-500 text-white text-base">
-                                        <th></th>
-                                        <th>Tour</th>
-                                        <th>Package Type</th>
-                                        <th>Price</th>
-                                        <th className=" opacity-0">Book</th>
-                                        <th className=" opacity-0">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        wishlist.map((tour, index) => tour ? <tr key={tour._id} className=" text-base">
-                                            <th>{index + 1}</th>
-                                            <td>{tour.tourists_spot_name}</td>
-                                            <td>{tour.packageType}</td>
+                        {
+                            wishlist.length > 0 ?
+                                <div className="overflow-x-auto  my-5">
+                                    <table className="table table-zebra">
+                                        <thead>
+                                            <tr className=" bg-orange-500 text-white text-base">
+                                                <th></th>
+                                                <th>Tour</th>
+                                                <th>Package Type</th>
+                                                <th>Price</th>
+                                                <th className=" opacity-0">Book</th>
+                                                <th className=" opacity-0">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             {
-                                                tour.packageType == 'Premium' ?
-                                                    <td className=" font-semibold">{tour.average_cost * 1.5}</td>
+                                                wishlist.map((tour, index) => tour ? <tr key={tour._id} className=" text-base">
+                                                    <th>{index + 1}</th>
+                                                    <td>{tour.tourists_spot_name}</td>
+                                                    <td>{tour.packageType}</td>
+                                                    {
+                                                        tour.packageType == 'Premium' ?
+                                                            <td className=" font-semibold">{tour.average_cost * 1.5}</td>
 
-                                                    :
-                                                    <td className=" font-semibold">{tour.average_cost}</td>
-                                            }
-                                            <td><Link to={`/booking/${tour._id}/${tour.packageType}`} className=" btn bg-orange-500 text-white">Book Now</Link></td>
-                                            <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
+                                                            :
+                                                            <td className=" font-semibold">{tour.average_cost}</td>
+                                                    }
+                                                    <td><Link to={`/booking/${tour._id}/${tour.packageType}`} className=" btn bg-orange-500 text-white">Book Now</Link></td>
+                                                    <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
-                                        </tr> : null
-                                        )}
-                                </tbody>
-                            </table>
-                        </div>
+                                                </tr> : null
+                                                )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                :
+                                <h1 className=" text-4xl font-semibold text-orange-500 text-center my-40"> Nothing is on your wishlist</h1>
+                        }
                     </div>
                 </div>
             </div>

@@ -4,13 +4,16 @@ import useBookingData from "../../../Hooks/useBookingData";
 import { FaSearch, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SectionHeader from "../../../Shared/SectionHeader/SectionHeader";
+import Swal from "sweetalert2";
+import useAxios from "../../../Hooks/useAxios";
 
 const AllBookings = () => {
 
     const [loading, setLoading] = useState(true);
     const [allBookings, setAllBookings] = useState([]);
-    const [bookingData] = useBookingData();
+    const [bookingData, refetch] = useBookingData();
     const [searchedValue, setSearchedValue] = useState('');
+    const axiosSecure = useAxios();
 
     useEffect(() => {
         if (bookingData) {
@@ -32,6 +35,40 @@ const AllBookings = () => {
 
         return matchedSearch;
     })
+
+    const handleRemove = booking => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to reject this booking?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, reject!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/booking_reject?id=${booking._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Rejected!",
+                                text: "You've successfully rejected the booking.",
+                                icon: "success"
+                            });
+
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops !",
+                            text: error.message,
+                        });
+                    })
+            }
+        })
+    }
 
 
 
@@ -97,7 +134,7 @@ const AllBookings = () => {
                                                         <td>{booking.totalCost}</td>
 
                                                         <td><Link className=" btn bg-orange-500 text-white">Check & Verify</Link></td>
-                                                        <td><Link className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
+                                                        <td><Link onClick={() => handleRemove(booking)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                                     </tr>)
                                                 }

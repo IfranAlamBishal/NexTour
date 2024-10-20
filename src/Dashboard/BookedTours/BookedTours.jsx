@@ -5,13 +5,16 @@ import SectionHeader from "../../Shared/SectionHeader/SectionHeader";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import useUserBookingData from "../../Hooks/useUserBookingData";
+import Swal from "sweetalert2";
+import useAxios from "../../Hooks/useAxios";
 
 const BookedTours = () => {
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
-    const [userBookingData] = useUserBookingData()
+    const [userBookingData, refetch] = useUserBookingData()
     const [bookedTours, setBookedTours] = useState([]);
     const [searchedValue, setSearchedValue] = useState('');
+    const axiosSecure = useAxios();
 
     useEffect(() => {
         if (userBookingData) {
@@ -34,6 +37,40 @@ const BookedTours = () => {
 
         return matchedSearch;
     })
+
+    const handleRemove = booking => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to cancel this booking?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, cancel it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/booking_reject?id=${booking._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Cancelled!",
+                                text: "You've successfully cancelled the booking.",
+                                icon: "success"
+                            });
+
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops !",
+                            text: error.message,
+                        });
+                    })
+            }
+        })
+    }
 
     if (loading) {
         return (
@@ -96,7 +133,7 @@ const BookedTours = () => {
                                                         <td>{booking.totalCost}</td>
                                                         <td>{booking.status}</td>
 
-                                                        <td><Link className=" btn bg-orange-500 text-white">Cancel</Link></td>
+                                                        <td><Link onClick={() => handleRemove(booking)} className=" btn bg-orange-500 text-white">Cancel</Link></td>
 
                                                     </tr>)
                                                 }

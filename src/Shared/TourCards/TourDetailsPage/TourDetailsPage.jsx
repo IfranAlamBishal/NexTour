@@ -30,6 +30,13 @@ const TourDetailsPage = () => {
 
     }, [axiosSecure, id]);
 
+    const scrollUp = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
+
     const { _id, image, tourists_spot_name, country_Name, location, short_description, rating, travel_time, totalVisitorsPerYear, average_cost } = tourDetails;
 
 
@@ -184,7 +191,7 @@ const TourDetailsPage = () => {
                             <div className="card-actions justify-end ">
                                 <div className=" flex flex-col md:flex-row gap-5 lg:pt-32">
                                     <Link onClick={() => addToWishlist('Regular')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
-                                    <Link to={`/booking/${_id}/${"Regular"}`} className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
+                                    <Link onClick={scrollUp} to={`/booking/${_id}/${"Regular"}`} className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
                                     <label htmlFor="share_modal" className="btn bg-orange-500 text-white text-lg h-12 "><FaShareNodes /></label>
                                 </div>
                             </div>
@@ -204,7 +211,7 @@ const TourDetailsPage = () => {
                             <div className="card-actions justify-end">
                                 <div className=" flex flex-col md:flex-row gap-5 lg:pt-32">
                                     <Link onClick={() => addToWishlist('Premium')} className="btn bg-orange-500 text-white text-lg h-12 ">Add To Wishlist</Link>
-                                    <Link to={`/booking/${_id}/${"Premium"}`} className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
+                                    <Link onClick={scrollUp} to={`/booking/${_id}/${"Premium"}`} className="btn bg-orange-500 text-white text-lg h-12 ">Book Now</Link>
                                     <label htmlFor="share_modal" className="btn bg-orange-500 text-white text-lg h-12 "><FaShareNodes /></label>
                                 </div>
                             </div>

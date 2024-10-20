@@ -248,7 +248,17 @@ async function run() {
         const result = await tourData.deleteOne(query);
         res.send(result);
       }
-    })
+    });
+
+    app.delete("/booking_reject", async(req,res) => {
+      const id = req.query;
+
+      if (id) {
+        const query = { _id: new ObjectId(id) };
+        const result = await bookingCollection.deleteOne(query);
+        res.send(result);
+      }
+    });
 
 
     // Send a ping to confirm a successful connection

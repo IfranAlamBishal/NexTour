@@ -92,7 +92,7 @@ const BookingPage = () => {
             });
         }
 
-        else if(alreadyBooked){
+        else if (alreadyBooked) {
             Swal.fire({
                 icon: "error",
                 title: "Oops !",
@@ -118,20 +118,35 @@ const BookingPage = () => {
                         totalCost: totalCostValue,
                         number_of_traveller: e.target.number_of_traveller.value,
                         date: e.target.date.value,
+                        bkash_number: e.target.bkash_number.value,
                         trx_Id: e.target.trx_Id.value,
                         status: "pending"
                     }
 
                     axiosSecure.post('/add_to_bookingList', bookingData)
-                        .then(res => {
-                            if (res.data.insertedId) {
-                                Swal.fire({
-                                    title: "Submitted!",
-                                    text: "You've successfully submitted the booking. Please wait for confirmation",
-                                    icon: "success"
-                                });
+                        .then(response => {
+                            if (response.data.insertedId) {
 
-                                navigate('/dashboard/bookedTours')
+                                axiosSecure.delete(`/remove_from_wishlist?email=${user.email}&tourId=${_id}&packageType=${packageType}`)
+                                    .then(() => {
+                                        Swal.fire({
+                                            title: "Submitted!",
+                                            text: "You've successfully submitted the booking. Please wait for confirmation",
+                                            icon: "success"
+                                        });
+                                        navigate('/dashboard/bookedTours');
+
+                                    })
+                                    .catch(() => {
+                                        Swal.fire({
+                                            title: "Submitted!",
+                                            text: "You've successfully submitted the booking. Please wait for confirmation",
+                                            icon: "success"
+                                        });
+                                        navigate('/dashboard/bookedTours');
+                                    })
+
+
                             }
                         })
                         .catch(error => {
@@ -260,11 +275,20 @@ const BookingPage = () => {
 
                                         </ol>
                                     </div>
-                                    <div className="form-control">
-                                        <label className="label">
-                                            <span className="label-text text-xl font-semibold"> Enter Transaction ID</span>
-                                        </label>
-                                        <input type="text" placeholder="transaction id" className="input input-bordered" name="trx_Id" required />
+                                    <div className=" space-y-4">
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text text-xl font-semibold"> Bkash Number(Please share the bkash number you used for the transaction)</span>
+                                            </label>
+                                            <input type="text" placeholder="bkash number" className="input input-bordered" name="bkash_number" required />
+                                        </div>
+
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text text-xl font-semibold"> Enter Transaction ID</span>
+                                            </label>
+                                            <input type="text" placeholder="transaction id" className="input input-bordered" name="trx_Id" required />
+                                        </div>
                                     </div>
                                 </div>
 
