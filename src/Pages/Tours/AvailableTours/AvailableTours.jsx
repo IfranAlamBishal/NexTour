@@ -73,13 +73,13 @@ const AvailableTours = () => {
                 {/* search */}
 
                 <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg">
-                    <input type="text" placeholder="spot name" className="input input-bordered w-full max-w-md" name="search" />
+                    <input type="text" placeholder="spot name" className="input input-bordered w-full max-w-md bg-white text-black" name="search" />
                     <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
                 </form>
 
                 {/* Category */}
                 <div>
-                    <select onChange={handleCcountry} className="select select-bordered w-full max-w-xs text-lg font-medium">
+                    <select onChange={handleCcountry} className="select select-bordered w-full max-w-xs text-lg font-medium bg-white text-black">
                         <option selected disabled>
                             Country
                         </option>

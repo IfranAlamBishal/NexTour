@@ -242,19 +242,19 @@ const AllBlogs = () => {
                                     <label className="label">
                                         <span className="label-text">Title</span>
                                     </label>
-                                    <input type="text" placeholder="title" className="input input-bordered" name="title" required />
+                                    <input type="text" placeholder="title" className="input input-bordered bg-white text-black" name="title" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Photo URL</span>
                                     </label>
-                                    <input type="url" placeholder="photo url" className="input input-bordered" name="photo" required />
+                                    <input type="url" placeholder="photo url" className="input input-bordered bg-white text-black" name="photo" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Description</span>
                                     </label>
-                                    <textarea type="text" placeholder="description" className="textarea textarea-bordered textarea-lg w-full max-w-sm" name="description" required />
+                                    <textarea type="text" placeholder="description" className="textarea textarea-bordered textarea-lg w-full max-w-sm bg-white text-black" name="description" required />
                                 </div>
                                 <div className="card-actions justify-end mt-4">
                                     <button className="btn bg-orange-500 text-white">Post</button>

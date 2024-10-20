@@ -185,7 +185,7 @@ const BookingPage = () => {
                                         <label className="label">
                                             <span className="label-text text-xl font-semibold">Number of Traveller</span>
                                         </label>
-                                        <input onChange={handleTravellerCount} type="number" min="0" max="10" placeholder="min-1,  max-10" className="input input-bordered" name="number_of_traveller" required />
+                                        <input onChange={handleTravellerCount} type="number" min="0" max="10" placeholder="min-1,  max-10" className="input input-bordered bg-white text-black" name="number_of_traveller" required />
                                     </div>
 
                                     <div className="form-control">
@@ -196,7 +196,7 @@ const BookingPage = () => {
                                             // filterDate={isAvailableDate} 
                                             placeholderText="Select a Date"
                                             minDate={minSelectableDate}
-                                            className=" border-2 rounded-lg px-4 py-2 "
+                                            className=" border-2 rounded-lg px-4 py-2 bg-white text-black max-w-64"
                                             name="date"
                                         />
                                     </div>

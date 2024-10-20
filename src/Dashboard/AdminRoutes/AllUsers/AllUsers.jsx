@@ -186,7 +186,7 @@ const AllUsers = () => {
                             {/* search */}
 
                             <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg mx-auto my-5">
-                                <input type="text" placeholder="user name or email" className="input input-bordered w-full max-w-md" name="search" />
+                                <input type="text" placeholder="user name or email" className="input input-bordered w-full max-w-md bg-white text-black" name="search" />
                                 <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
                             </form>
                         </div>
@@ -245,7 +245,7 @@ const AllUsers = () => {
                                                 defaultValue={selectedUser.role}
                                                 name="newRole"
                                                 // onChange={handleRoleChange}
-                                                className="select select-bordered max-w-md mt-1"
+                                                className="select select-bordered max-w-md mt-1 bg-white text-black"
                                             >
                                                 <option value="user">User</option>
                                                 <option value="admin">Admin</option>

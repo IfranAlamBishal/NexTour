@@ -197,12 +197,12 @@ const AllTours = () => {
 
                     <div className=" w-5/6 mx-auto my-20">
                         <div className=" flex flex-col md:flex-row justify-between gap-5">
-                            <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Tours: {availableSpots.length} </h1>
+                            <h1 className=" text-2xl font-semibold text-orange-500 my-5 "> Total Tours: {availableSpots.length} </h1>
 
                             {/* search */}
 
                             <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg mx-auto my-5">
-                                <input type="text" placeholder="spot or country name" className="input input-bordered w-full max-w-md" name="search" />
+                                <input type="text" placeholder="spot or country name" className="input input-bordered w-full max-w-md bg-white text-black" name="search" />
                                 <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
                             </form>
 
@@ -260,13 +260,13 @@ const AllTours = () => {
                                         <label className="label">
                                             <span className="label-text">Spot Name</span>
                                         </label>
-                                        <input type="text" placeholder="spot name" className="input input-bordered" name="spot_name" required />
+                                        <input type="text" placeholder="spot name" className="input input-bordered bg-white text-black" name="spot_name" required />
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
                                             <span className="label-text">Location</span>
                                         </label>
-                                        <input type="text" placeholder="location" className="input input-bordered" name="location" required />
+                                        <input type="text" placeholder="location" className="input input-bordered bg-white text-black" name="location" required />
                                     </div>
                                 </div>
 
@@ -275,13 +275,13 @@ const AllTours = () => {
                                         <label className="label">
                                             <span className="label-text">Country Name</span>
                                         </label>
-                                        <input type="text" placeholder="country name" className="input input-bordered" name="country_name" required />
+                                        <input type="text" placeholder="country name" className="input input-bordered bg-white text-black" name="country_name" required />
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
                                             <span className="label-text">Duration</span>
                                         </label>
-                                        <input type="text" placeholder="duration" className="input input-bordered" name="duration" required />
+                                        <input type="text" placeholder="duration" className="input input-bordered bg-white text-black" name="duration" required />
                                     </div>
                                 </div>
 
@@ -290,13 +290,13 @@ const AllTours = () => {
                                         <label className="label">
                                             <span className="label-text">Regular Cost</span>
                                         </label>
-                                        <input type="number" min="0" placeholder="regular cost" className="input input-bordered" name="regular_cost" required />
+                                        <input type="number" min="0" placeholder="regular cost" className="input input-bordered bg-white text-black" name="regular_cost" required />
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
                                             <span className="label-text">Premium Cost</span>
                                         </label>
-                                        <input type="number" min="0" placeholder="premium cost" className="input input-bordered" name="premium_cost" />
+                                        <input type="number" min="0" placeholder="premium cost" className="input input-bordered bg-white text-black" name="premium_cost" />
                                     </div>
                                 </div>
 
@@ -305,13 +305,13 @@ const AllTours = () => {
                                         <label className="label">
                                             <span className="label-text">Rating</span>
                                         </label>
-                                        <input type="number" min="0.0" max="5.0" step="0.1" placeholder="rating" className="input input-bordered" name="rating" required />
+                                        <input type="number" min="0.0" max="5.0" step="0.1" placeholder="rating" className="input input-bordered bg-white text-black" name="rating" required />
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
                                             <span className="label-text">Total Visitor Per Year</span>
                                         </label>
-                                        <input type="number" min="0" placeholder="total visitor per year" className="input input-bordered" name="totalVisitorsPerYear" />
+                                        <input type="number" min="0" placeholder="total visitor per year" className="input input-bordered bg-white text-black" name="totalVisitorsPerYear" />
                                     </div>
                                 </div>
 
@@ -319,13 +319,13 @@ const AllTours = () => {
                                     <label className="label">
                                         <span className="label-text">Photo URL</span>
                                     </label>
-                                    <input type="url" placeholder="photo url" className="input input-bordered" name="photo" required />
+                                    <input type="url" placeholder="photo url" className="input input-bordered bg-white text-black" name="photo" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Description</span>
                                     </label>
-                                    <textarea type="text" placeholder="description" className="textarea textarea-bordered textarea-lg w-full max-w-sm" name="description" required />
+                                    <textarea type="text" placeholder="description" className="textarea textarea-bordered textarea-lg w-full max-w-sm bg-white text-black" name="description" required />
                                 </div>
                                 <div className="card-actions justify-end mt-4">
                                     <button className="btn bg-orange-500 text-white">Add</button>
@@ -358,14 +358,14 @@ const AllTours = () => {
                                                 <label className="label">
                                                     <span className="label-text">Spot Name</span>
                                                 </label>
-                                                <input type="text" defaultValue={selectedTour.tourists_spot_name} className="input input-bordered" name="tourists_spot_name" required />
+                                                <input type="text" defaultValue={selectedTour.tourists_spot_name} className="input input-bordered bg-white text-black" name="tourists_spot_name" required />
                                             </div>
 
                                             <div className="form-control">
                                                 <label className="label">
                                                     <span className="label-text">Location</span>
                                                 </label>
-                                                <input type="text" defaultValue={selectedTour.location} className="input input-bordered" name="location" required />
+                                                <input type="text" defaultValue={selectedTour.location} className="input input-bordered bg-white text-black" name="location" required />
                                             </div>
                                         </div>
 
@@ -374,14 +374,14 @@ const AllTours = () => {
                                                 <label className="label">
                                                     <span className="label-text">Country Name</span>
                                                 </label>
-                                                <input type="text" defaultValue={selectedTour.country_Name} className="input input-bordered" name="country_Name" required />
+                                                <input type="text" defaultValue={selectedTour.country_Name} className="input input-bordered bg-white text-black" name="country_Name" required />
                                             </div>
 
                                             <div className="form-control">
                                                 <label className="label">
                                                     <span className="label-text">Duration</span>
                                                 </label>
-                                                <input type="text" defaultValue={selectedTour.travel_time} className="input input-bordered" name="travel_time" required />
+                                                <input type="text" defaultValue={selectedTour.travel_time} className="input input-bordered bg-white text-black" name="travel_time" required />
                                             </div>
                                         </div>
 
@@ -390,14 +390,14 @@ const AllTours = () => {
                                                 <label className="label">
                                                     <span className="label-text">Regular Cost</span>
                                                 </label>
-                                                <input type="number" min="0" defaultValue={selectedTour.average_cost} className="input input-bordered" name="average_cost" required />
+                                                <input type="number" min="0" defaultValue={selectedTour.average_cost} className="input input-bordered bg-white text-black" name="average_cost" required />
                                             </div>
 
                                             <div className="form-control">
                                                 <label className="label">
                                                     <span className="label-text">Premium Cost</span>
                                                 </label>
-                                                <input type="number" min="0" defaultValue='0' className="input input-bordered" name="premium_cost" />
+                                                <input type="number" min="0" defaultValue='0' className="input input-bordered bg-white text-black" name="premium_cost" />
                                             </div>
                                         </div>
 
@@ -406,14 +406,14 @@ const AllTours = () => {
                                                 <label className="label">
                                                     <span className="label-text">Rating</span>
                                                 </label>
-                                                <input type="number" min="0" max="5" step="0.1" defaultValue={selectedTour.rating} className="input input-bordered" name="rating" required />
+                                                <input type="number" min="0" max="5" step="0.1" defaultValue={selectedTour.rating} className="input input-bordered bg-white text-black" name="rating" required />
                                             </div>
 
                                             <div className="form-control">
                                                 <label className="label">
                                                     <span className="label-text">Total Visitor Per Year</span>
                                                 </label>
-                                                <input type="number" min="0" defaultValue={selectedTour.totalVisitorsPerYear} className="input input-bordered" name="totalVisitorsPerYear" />
+                                                <input type="number" min="0" defaultValue={selectedTour.totalVisitorsPerYear} className="input input-bordered bg-white text-black" name="totalVisitorsPerYear" />
                                             </div>
                                         </div>
 
@@ -421,18 +421,21 @@ const AllTours = () => {
                                             <label className="label">
                                                 <span className="label-text">Photo URL</span>
                                             </label>
-                                            <input type="url" defaultValue={selectedTour.image} className="input input-bordered" name="image" required />
+                                            <input type="url" defaultValue={selectedTour.image} className="input input-bordered bg-white text-black" name="image" required />
                                         </div>
                                         <div className="form-control">
                                             <label className="label">
                                                 <span className="label-text">Description</span>
                                             </label>
-                                            <textarea type="text" defaultValue={selectedTour.short_description} className="textarea textarea-bordered textarea-lg w-full max-w-sm" name="short_description" required />
+                                            <textarea type="text" defaultValue={selectedTour.short_description} className="textarea textarea-bordered textarea-lg w-full max-w-sm bg-white text-black" name="short_description" required />
                                         </div>
                                         <div className="card-actions justify-end mt-4">
                                             <button className="btn bg-orange-500 text-white">Update</button>
                                         </div>
                                     </form>
+                                </div>
+                                <div className="modal-action">
+                                    <label htmlFor="update_modal" className="btn">Close!</label>
                                 </div>
                             </div>
                         </div>

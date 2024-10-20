@@ -63,7 +63,7 @@ const Blogs = () => {
                     {/* search */}
 
                     <form onSubmit={handleSearch} className=" relative border-2 max-w-md rounded-lg mx-auto my-10">
-                        <input type="text" placeholder="spot name" className="input input-bordered w-full max-w-md" name="search" />
+                        <input type="text" placeholder="spot name" className="input input-bordered w-full max-w-md bg-white text-black" name="search" />
                         <button className="absolute  right-2.5 top-4"><FaSearch className="text-orange-500 w-5 h-5" /></button>
                     </form>
                     <div className=" grid grid-cols-1 gap-10">

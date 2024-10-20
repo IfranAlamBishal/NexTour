@@ -65,19 +65,19 @@ const WhyNexTour = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" placeholder="Name" className="input input-bordered" name="name" required />
+                                <input type="text" placeholder="Name" className="input input-bordered bg-white text-black" name="name" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" className="input input-bordered" name="email" required />
+                                <input type="email" placeholder="email" className="input input-bordered bg-white text-black" name="email" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Message</span>
                                 </label>
-                                <textarea type="text" placeholder="message" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="message" required />
+                                <textarea type="text" placeholder="message" className="textarea textarea-bordered textarea-lg w-full max-w-xs bg-white text-black" name="message" required />
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn bg-orange-500 text-white">Send</button>
