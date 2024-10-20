@@ -156,7 +156,6 @@ const AllBlogs = () => {
     }
 
 
-
     if (loading) {
         return (
             <div className="text-center">

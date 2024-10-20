@@ -140,7 +140,7 @@ const Wishlist = () => {
                                                     :
                                                     <td className=" font-semibold">{tour.average_cost}</td>
                                             }
-                                            <td><Link className=" btn bg-orange-500 text-white">Book Now</Link></td>
+                                            <td><Link to={`/booking/${tour._id}/${tour.packageType}`} className=" btn bg-orange-500 text-white">Book Now</Link></td>
                                             <td><Link onClick={() => handleRemove(tour)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                         </tr> : null

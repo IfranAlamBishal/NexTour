@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxios from "../../Hooks/useAxios";
 import { Helmet } from "react-helmet-async";
 import SectionHeader from "../../Shared/SectionHeader/SectionHeader";
@@ -9,6 +9,7 @@ import { addDays } from 'date-fns';
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import useAdmin from "../../Hooks/useAdmin";
+import useUserBookingData from "../../Hooks/useUserBookingData";
 
 const BookingPage = () => {
 
@@ -20,6 +21,8 @@ const BookingPage = () => {
     const [travellerCount, setTravellerCount] = useState(0);
     const { user } = useContext(AuthContext);
     const isAdmin = useAdmin();
+    const [userBookingData] = useUserBookingData();
+    const navigate = useNavigate();
 
     const minSelectableDate = addDays(new Date(), 7);
 
@@ -35,6 +38,7 @@ const BookingPage = () => {
     }, [axiosSecure, id]);
 
     const { _id, image, tourists_spot_name, country_Name, location, travel_time, average_cost } = tourDetails;
+
 
     const copyNumber = () => {
         const bkashNumber = "01830 000000";
@@ -78,12 +82,21 @@ const BookingPage = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        const alreadyBooked = userBookingData.find(booking => booking.tourId == _id);
 
         if (isAdmin) {
             Swal.fire({
                 icon: "error",
                 title: "Oops !",
                 text: "Admin Can't book any package.",
+            });
+        }
+
+        else if(alreadyBooked){
+            Swal.fire({
+                icon: "error",
+                title: "Oops !",
+                text: "This tour is already booked by you. Please check your Booking List",
             });
         }
         else {
@@ -106,7 +119,7 @@ const BookingPage = () => {
                         number_of_traveller: e.target.number_of_traveller.value,
                         date: e.target.date.value,
                         trx_Id: e.target.trx_Id.value,
-                        statue: "pending"
+                        status: "pending"
                     }
 
                     axiosSecure.post('/add_to_bookingList', bookingData)
@@ -118,6 +131,7 @@ const BookingPage = () => {
                                     icon: "success"
                                 });
 
+                                navigate('/dashboard/bookedTours')
                             }
                         })
                         .catch(error => {
