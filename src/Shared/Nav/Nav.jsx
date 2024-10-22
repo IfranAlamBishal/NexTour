@@ -60,7 +60,7 @@ const handleLogOut = () => {
                     <Link to='/' onClick={handleLogOut} className=" btn btn-error text-white text-base font-semibold">Log Out</Link>
                 </div>
                 :
-                <Link to='/login'><RiMapPinUserFill className=" w-10 h-10" /></Link>
+                <Link to='/login'><RiMapPinUserFill className=" w-10 h-10 text-orange-500" /></Link>
         }
 
     </>
