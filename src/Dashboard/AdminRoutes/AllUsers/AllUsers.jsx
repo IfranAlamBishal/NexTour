@@ -20,7 +20,8 @@ const AllUsers = () => {
 
     useEffect(() => {
         if (users) {
-            setAllUsers(users);
+            const newToOldUsers = users.reverse()
+            setAllUsers(newToOldUsers);
         }
         setLoading(false);
     }, [users])
