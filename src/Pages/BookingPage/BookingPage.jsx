@@ -280,14 +280,14 @@ const BookingPage = () => {
                                             <label className="label">
                                                 <span className="label-text text-xl font-semibold"> Bkash Number(Please share the bkash number you used for the transaction)</span>
                                             </label>
-                                            <input type="text" placeholder="bkash number" className="input input-bordered" name="bkash_number" required />
+                                            <input type="text" placeholder="bkash number" className="input input-bordered bg-white text-black" name="bkash_number" required />
                                         </div>
 
                                         <div className="form-control">
                                             <label className="label">
                                                 <span className="label-text text-xl font-semibold"> Enter Transaction ID</span>
                                             </label>
-                                            <input type="text" placeholder="transaction id" className="input input-bordered" name="trx_Id" required />
+                                            <input type="text" placeholder="transaction id" className="input input-bordered bg-white text-black" name="trx_Id" required />
                                         </div>
                                     </div>
                                 </div>
