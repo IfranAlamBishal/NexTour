@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useBookingData from "../../../Hooks/useBookingData";
 import { FaSearch, FaTrashAlt } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SectionHeader from "../../../Shared/SectionHeader/SectionHeader";
 import Swal from "sweetalert2";
 import useAxios from "../../../Hooks/useAxios";
+import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 
 const AllBookings = () => {
 
@@ -14,10 +15,13 @@ const AllBookings = () => {
     const [bookingData, refetch] = useBookingData();
     const [searchedValue, setSearchedValue] = useState('');
     const axiosSecure = useAxios();
+    const [selectedBooking, setSelectedBooking] = useState({});
+    const {user} = useContext(AuthContext);
 
     useEffect(() => {
         if (bookingData) {
-            setAllBookings(bookingData);
+            const newToOld = bookingData.reverse();
+            setAllBookings(newToOld);
         }
         setLoading(false);
     }, [bookingData])
@@ -71,6 +75,66 @@ const AllBookings = () => {
     }
 
 
+    const handleBookingDetailsModal = booking => {
+        setSelectedBooking(booking);
+        document.getElementById("booking_details").checked = true;
+    }
+
+
+    const handleVerify = e => {
+        e.preventDefault();
+
+        if (selectedBooking.status == "verified") {
+            Swal.fire({
+                icon: "error",
+                title: "Oops !",
+                text: "Already Verified!",
+            });
+        }
+        else {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to verify this bookig? Please double check all the information.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, verify!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const bookingId = selectedBooking._id;
+                    const verified = {
+                        status: "verified",
+                        approvedBy: user.displayName
+                    }
+
+                    axiosSecure.patch(`/booking_verification/${bookingId}`, verified)
+                        .then(res => {
+                            if (res.data.modifiedCount > 0) {
+                                refetch();
+                                document.getElementById("booking_details").checked = false;
+                                Swal.fire({
+                                    title: "Verified!",
+                                    text: "You've successfully verified the booking.",
+                                    icon: "success"
+                                });
+                            }
+                        })
+
+                        .catch(error => {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops !",
+                                text: error.message,
+                            });
+                        })
+                }
+            })
+
+
+        }
+    }
+
 
 
 
@@ -114,13 +178,14 @@ const AllBookings = () => {
                                 <>
                                     {/* Table */}
                                     <div className="overflow-x-auto  my-5">
-                                        <table className="table table-zebra">
+                                        <table className="table table-zebra table-auto w-full max-w-full">
                                             <thead>
                                                 <tr className=" bg-orange-500 text-white text-base">
                                                     <th></th>
                                                     <th>Email</th>
                                                     <th>Transaction ID</th>
                                                     <th>Total Amount</th>
+                                                    <th>Status</th>
                                                     <th className=" opacity-0">Check & Verify</th>
                                                     <th className=" opacity-0">Reject</th>
                                                 </tr>
@@ -132,8 +197,9 @@ const AllBookings = () => {
                                                         <td>{booking.email}</td>
                                                         <td>{booking.trx_Id}</td>
                                                         <td>{booking.totalCost}</td>
+                                                        <td>{booking.status}</td>
 
-                                                        <td><Link className=" btn bg-orange-500 text-white">Check & Verify</Link></td>
+                                                        <td><Link onClick={() => handleBookingDetailsModal(booking)} className=" btn bg-orange-500 text-white">Check & Verify</Link></td>
                                                         <td><Link onClick={() => handleRemove(booking)} className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                                     </tr>)
@@ -145,6 +211,37 @@ const AllBookings = () => {
                                 :
                                 <h1 className=" text-4xl font-semibold text-orange-500 text-center my-20"> No Booking Data Available </h1>
                         }
+                    </div>
+                </div>
+
+
+                {/* Booking details modal for verification */}
+
+                <input type="checkbox" id="booking_details" className="modal-toggle" />
+                <div className="modal" role="dialog">
+                    <div className="modal-box">
+
+                        <div>
+                            <form onSubmit={handleVerify} className="card-body p-4">
+                                <h1 className=" text-orange-500 mb-5 text-2xl font-semibold "> Double check all information before verify</h1>
+                                <h1 className=" text-xl font-semibold my-3">Booked by: {selectedBooking.email}</h1>
+                                <div className=" space-y-3">
+                                    <p className=" text-lg "><span className=" font-semibold">Tour Name: </span>{selectedBooking.tourists_spot_name}</p>
+                                    <p className=" text-lg "><span className=" font-semibold">Package Type: </span>{selectedBooking.packageType}</p>
+                                    <p className=" text-lg "><span className=" font-semibold">Number Of Traveller: </span>{selectedBooking.number_of_traveller}</p>
+                                    <p className=" text-lg "><span className=" font-semibold">Total Cost: </span>{selectedBooking.totalCost} BDT</p>
+                                    <p className=" text-lg "><span className=" font-semibold">Bkash Number: </span>{selectedBooking.bkash_number}</p>
+                                    <p className=" text-lg "><span className=" font-semibold">Transaction ID: </span>{selectedBooking.trx_Id}</p>
+                                </div>
+                                <div className="card-actions justify-end mt-4">
+                                    <button htmlFor="booking_details" className="btn bg-orange-500 text-white">Verify</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div className="modal-action">
+                            <label htmlFor="booking_details" className="btn">Close!</label>
+                        </div>
                     </div>
                 </div>
             </div>

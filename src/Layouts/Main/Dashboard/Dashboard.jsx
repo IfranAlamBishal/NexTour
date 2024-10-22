@@ -43,9 +43,9 @@ const Dashboard = () => {
                 </>
                 :
                 <>
-                    <li><NavLink to='/dashboard/wishlist'>Wishlist</NavLink></li>
+                    <li><NavLink to='/dashboard/wishlist'>My Wishlist</NavLink></li>
                     <li><NavLink to='/dashboard/bookedTours'>My Bookings</NavLink></li>
-                    <li><NavLink to='/dashboard/user_reviews'>My Reviews</NavLink></li>
+                    {/* <li><NavLink to='/dashboard/user_reviews'>My Reviews</NavLink></li> */}
                     <li><NavLink to='/dashboard/user_blogs'>My Blogs</NavLink></li>
                 </>
         }
@@ -70,13 +70,13 @@ const Dashboard = () => {
                 </div>
                 )
             }
-            <div className=" md:w-64 lg:w-72  md:min-h-screen p-5 bg-orange-500 text-white">
+            <div className=" md:w-64 lg:w-72  md:min-h-screen p-5 bg-orange-500 text-white flex-shrink-0">
                 <Link to='/' className="btn text-2xl md:text-3xl lg:text-4xl font-bold gap-0 mb-5"><span className=" text-orange-500">Nex</span>Tour</Link>
                 {dashLinks}
                 <hr className=" w-2/3 mx-auto my-5 border-2 border-black" />
                 <Link to='/' className=" ml-3">Home</Link>
             </div>
-            <div className=" flex-1 p-5">
+            <div className=" flex-1 p-5 min-h-screen">
                 <Outlet></Outlet>
             </div>
         </div>

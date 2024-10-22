@@ -19,7 +19,8 @@ const AllBlogs = () => {
 
     useEffect(() => {
         if (blogsData) {
-            setAllBlogs(blogsData);
+            const reverseBlogs = blogsData.reverse();
+            setAllBlogs(reverseBlogs);
         }
         setLoading(false);
     }, [blogsData])
@@ -232,7 +233,7 @@ const AllBlogs = () => {
                 {/* Modal for write new Blog */}
 
                 <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-                <div className="modal" role="dialog">
+                <div className="modal " role="dialog">
                     <div className="modal-box">
 
                         <div>
@@ -271,7 +272,7 @@ const AllBlogs = () => {
                 {/* Modal for Check and Approve Blog */}
 
                 <input type="checkbox" id="check_&_approve" className="modal-toggle" />
-                <div className="modal" role="dialog">
+                <div className="modal bg-white text-black" role="dialog">
                     <div className="modal-box">
 
                         <div>

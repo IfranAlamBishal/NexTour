@@ -198,6 +198,17 @@ async function run() {
         res.send(result);
       }
     });
+
+    app.patch('/booking_verification/:id', async(req,res) => {
+      const bookingId = req.params.id;
+      const verified =  req.body;
+
+      if(bookingId && verified){
+        const id = { _id: new ObjectId(bookingId) };
+        const result = await bookingCollection.updateOne(id, { $set: verified });
+        res.send(result);
+      }
+    });
     
 
     // Delete Operation 

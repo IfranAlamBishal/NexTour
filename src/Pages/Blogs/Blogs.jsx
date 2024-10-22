@@ -18,6 +18,7 @@ const Blogs = () => {
         }, 1000);
         return () => clearTimeout(timer);
     }, []);
+    
 
     useEffect(() => {
         if (blogsData && blogsData.length > 0) {

@@ -69,7 +69,7 @@ const Profile = () => {
                                     <label className="label">
                                         <span className="label-text">Name</span>
                                     </label>
-                                    <input type="text" placeholder="name" className="input input-bordered" name="name" required />
+                                    <input type="text" placeholder="name" className="input input-bordered bg-white text-black" name="name" required />
                                 </div>
 
                                 <div className="card-actions justify-end mt-4">
@@ -84,7 +84,7 @@ const Profile = () => {
                                     <label className="label">
                                         <span className="label-text">Photo URL</span>
                                     </label>
-                                    <input type="url" placeholder="photo url" className="input input-bordered" name="photo" required />
+                                    <input type="url" placeholder="photo url" className="input input-bordered bg-white text-black" name="photo" required />
                                 </div>
                                 <div className="card-actions justify-end mt-4">
                                     <button  className="btn bg-orange-500 text-white">Update Photo</button>
