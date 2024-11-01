@@ -24,7 +24,7 @@ The platform includes user reviews and ratings, a community blog for sharing tra
 - *Tailwindcss*
 - *Daisyui*
 - *Firebase*
-- *and more *
+- *and more*
 
 
 ## Installation
