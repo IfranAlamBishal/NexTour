@@ -14,6 +14,18 @@ The platform includes user reviews and ratings, a community blog for sharing tra
 -	Discount Code Integration
 -	Booking and Wishlist
 
+## Technologies Used
+
+- *React.js*
+- *Express.js*
+- *MongoDB*
+- *Node.js*
+- *React-router-dom*
+- *Tailwindcss*
+- *Daisyui*
+- *Firebase*
+- *and more *
+
 
 ## Installation
 
