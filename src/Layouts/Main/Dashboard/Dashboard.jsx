@@ -45,7 +45,7 @@ const Dashboard = () => {
                 <>
                     <li><NavLink to='/dashboard/wishlist'>My Wishlist</NavLink></li>
                     <li><NavLink to='/dashboard/bookedTours'>My Bookings</NavLink></li>
-                    {/* <li><NavLink to='/dashboard/user_reviews'>My Reviews</NavLink></li> */}
+                    <li><NavLink to='/dashboard/user_reviews'>My Reviews</NavLink></li>
                     <li><NavLink to='/dashboard/user_blogs'>My Blogs</NavLink></li>
                 </>
         }
