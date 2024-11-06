@@ -11,7 +11,7 @@ import useAxios from "../../Hooks/useAxios";
 const BookedTours = () => {
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
-    const [userBookingData, refetch] = useUserBookingData()
+    const [userBookingData, refetch] = useUserBookingData();
     const [bookedTours, setBookedTours] = useState([]);
     const [searchedValue, setSearchedValue] = useState('');
     const axiosSecure = useAxios();
