@@ -13,12 +13,14 @@ const UserReviews = () => {
 
     useEffect(() => {
         if (userBookingData && user) {
-            const confirmedBookings = userBookingData.map(booking => booking.status == "verified")
+            const confirmedBookings = userBookingData.filter(booking => booking.status == "verified")
             const newToOld = confirmedBookings.reverse();
             setVerifiedBookings(newToOld);
         }
         setLoading(false);
     }, [userBookingData, user])
+
+    console.log(verifiedBookings);
 
 
     if (loading) {
@@ -44,7 +46,10 @@ const UserReviews = () => {
                         title='My Reviews'
                     ></SectionHeader>
 
-                    <h1 className=" text-4xl font-semibold text-orange-500 text-center my-40"> No Tours to review</h1>
+                    <div className=" w-5/6 mx-auto my-20">
+                        <h1 className=" text-4xl font-semibold text-orange-500 text-center my-40"> No Tours to review</h1>
+                    </div>
+
                 </div>
             </div>
         );

@@ -92,8 +92,8 @@ const Wishlist = () => {
                         title='Wishlist'
                     ></SectionHeader>
 
-                    <div className=" w-5/6 mx-auto">
-                        <h1 className=" text-2xl font-semibold text-orange-500 my-5"> Total Packages on Wishlist: {wishlist.length} </h1>
+                    <div className=" w-5/6 mx-auto my-20">
+                        <h1 className=" text-2xl font-semibold text-orange-500 my-10"> Total Packages on Wishlist: {wishlist.length} </h1>
 
                         {/* Table */}
                         {
