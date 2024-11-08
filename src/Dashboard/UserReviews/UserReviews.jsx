@@ -47,6 +47,8 @@ const UserReviews = () => {
                     ></SectionHeader>
 
                     <div className=" w-5/6 mx-auto my-20">
+
+                    <h1 className=" text-2xl font-semibold text-orange-500 my-10"> Total Tours to Review: {verifiedBookings.length} </h1>
                         <h1 className=" text-4xl font-semibold text-orange-500 text-center my-40"> No Tours to review</h1>
                     </div>
 
