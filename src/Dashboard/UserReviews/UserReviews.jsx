@@ -20,8 +20,6 @@ const UserReviews = () => {
         setLoading(false);
     }, [userBookingData, user])
 
-    console.log(verifiedBookings);
-
 
     if (loading) {
         return (
