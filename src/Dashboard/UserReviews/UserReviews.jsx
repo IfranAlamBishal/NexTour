@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import SectionHeader from "../../Shared/SectionHeader/SectionHeader";
 import useUserBookingData from "../../Hooks/useUserBookingData";
 import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
 
 const UserReviews = () => {
     const { user } = useContext(AuthContext);
@@ -60,24 +61,22 @@ const UserReviews = () => {
                                                         <th></th>
                                                         <th>Tour</th>
                                                         <th>Review</th>
-                                                        <th className=" opacity-0">Update</th>
+                                                        <th className=" opacity-0">Add/Update</th>
                                                         <th className=" opacity-0">Remove</th>
                                                     </tr>
                                                 </thead>
-                                                {/* <tbody>
+                                                <tbody>
                                                     {
-                                                        availableBookings.map((booking, index) => <tr key={booking._id} className=" text-base">
+                                                        verifiedBookings.map((booking, index) => <tr key={booking._id} className=" text-base">
                                                             <th>{index + 1}</th>
                                                             <td>{booking.tourists_spot_name}</td>
-                                                            <td>{booking.trx_Id}</td>
-                                                            <td>{booking.totalCost}</td>
-                                                            <td>{booking.status}</td>
-
-                                                            <td><Link onClick={() => handleRemove(booking)} className=" btn bg-orange-500 text-white">Cancel</Link></td>
+                                                            <td>review</td>
+                                                            <td><Link className=" btn bg-orange-500 text-white">Add/Update</Link></td>
+                                                            <td><Link className=" btn bg-orange-500 text-white"><FaTrashAlt className=" w-5 h-5" /></Link></td>
 
                                                         </tr>)
                                                     }
-                                                </tbody> */}
+                                                </tbody>
                                             </table>
                                         </div>
                                     </>
