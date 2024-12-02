@@ -17,7 +17,7 @@ const Home = () => {
             </div>
             <div className=" w-5/6 mx-auto">
                 <PopularTours/>
-                <UserReview/>
+                {/* <UserReview/> */}
                 <WhyNexTour/>
             </div>
         </div>

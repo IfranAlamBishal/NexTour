@@ -275,7 +275,15 @@ const BookingPage = () => {
 
                                         </ol>
                                     </div>
-                                    <div className=" space-y-4">
+
+                                    <div className=" space-y-4 my-4">
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text text-xl font-semibold"> Discount Code</span>
+                                            </label>
+                                            <input type="text" placeholder="discount code" className="input input-bordered bg-white text-black" name="discount_code" />
+                                        </div>
+
                                         <div className="form-control">
                                             <label className="label">
                                                 <span className="label-text text-xl font-semibold"> Bkash Number(Please share the bkash number you used for the transaction)</span>
