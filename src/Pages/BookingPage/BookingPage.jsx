@@ -23,6 +23,7 @@ const BookingPage = () => {
     const isAdmin = useAdmin();
     const [userBookingData] = useUserBookingData();
     const navigate = useNavigate();
+    const [discountCode, setDiscountCode] = useState(0);
 
     const minSelectableDate = addDays(new Date(), 7);
 
@@ -59,6 +60,16 @@ const BookingPage = () => {
             })
     }
 
+    const handleTravellerCount = e => {
+        setTravellerCount(e.target.value);
+    }
+
+    const handleDiscountCode = e => {
+        setDiscountCode(e.target.value);
+    }
+
+    // console.log(discountCode)
+
     const totalCostValue = travellerCount > 0
         ? (packageType === "premium"
             ? average_cost * 1.5 * travellerCount
@@ -68,7 +79,7 @@ const BookingPage = () => {
     const totalCost = (
         <>
             {travellerCount > 0 && (
-                <h1 className="text-orange-500 font-semibold">
+                <h1 className="text-orange-500 font-semibold text-xl">
                     {totalCostValue} BDT
                 </h1>
             )}
@@ -76,9 +87,7 @@ const BookingPage = () => {
     );
 
 
-    const handleTravellerCount = e => {
-        setTravellerCount(e.target.value);
-    }
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -281,7 +290,7 @@ const BookingPage = () => {
                                             <label className="label">
                                                 <span className="label-text text-xl font-semibold"> Discount Code</span>
                                             </label>
-                                            <input type="text" placeholder="discount code" className="input input-bordered bg-white text-black" name="discount_code" />
+                                            <input onChange={handleDiscountCode} type="text" placeholder="discount code" className="input input-bordered bg-white text-black" name="discount_code" />
                                         </div>
 
                                         <div className="form-control">
