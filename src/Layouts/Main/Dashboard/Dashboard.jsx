@@ -39,6 +39,7 @@ const Dashboard = () => {
                     <li><NavLink to='/dashboard/allUsers'>All Users</NavLink></li>
                     <li><NavLink to='/dashboard/allTours'>All Tours</NavLink></li>
                     <li><NavLink to='/dashboard/allBookings'>All Bookings</NavLink></li>
+                    <li><NavLink to='/dashboard/allDiscountCodes'>All Discount Codes</NavLink></li>
                     <li><NavLink to='/dashboard/allBlogs'>All Blogs</NavLink></li>
                 </>
                 :

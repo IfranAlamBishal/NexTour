@@ -23,7 +23,9 @@ import AllTours from "../Dashboard/AdminRoutes/AllTours/AllTours";
 import AllBookings from "../Dashboard/AdminRoutes/AllBookings/AllBookings";
 import AllBlogs from "../Dashboard/AdminRoutes/AllBlogs/AllBlogs";
 import AdminRoutes from "./AdminRoutes/AdminRoutes";
-import BookingPage from "../Pages/BookingPage/bookingPage";
+import BookingPage from "../Pages/BookingPage/BookingPage";
+import AllDiscountCodes from "../Dashboard/AdminRoutes/AllDiscountCodes/AllDiscountCodes";
+
 
 
 export const router = createBrowserRouter([
@@ -115,6 +117,10 @@ export const router = createBrowserRouter([
       {
         path: "allBlogs",
         element: <AdminRoutes><AllBlogs /></AdminRoutes>,
+      },
+      {
+        path: "allDiscountCodes",
+        element: <AdminRoutes><AllDiscountCodes/></AdminRoutes>,
       },
     ]
   }
