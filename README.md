@@ -3,7 +3,7 @@ NexTour is a user-friendly website that simplifies discovering and booking trave
 The platform includes user reviews and ratings, a community blog for sharing travel stories, and one-click social media sharing. NexTour also integrates discount codes and allows users to save trips in a wishlist for future bookings, making it the perfect tool for travel planning and inspiration.
 
 
-## Features
+# Features
 
 -	Search, Filter and Sort Tour Packages
 -	User Profile
@@ -14,7 +14,7 @@ The platform includes user reviews and ratings, a community blog for sharing tra
 -	Discount Code Integration
 -	Booking and Wishlist
 
-## Technologies Used
+# Technologies Used
 
 - *React.js*
 - *Express.js*
@@ -27,9 +27,9 @@ The platform includes user reviews and ratings, a community blog for sharing tra
 - *and more*
 
 
-## Installation
+# Installation
 
-**Clone the repository:**
+## **Clone the repository:**
    ```bash
    git clone https://github.com/IfranAlamBishal/NexTour.git
    ```
@@ -43,9 +43,9 @@ The platform includes user reviews and ratings, a community blog for sharing tra
    npm run dev
    ```
 
-## Contributing
+# Contributing
 
 This is an open-source project, and contributions are welcome! Whether you're interested in fixing bugs, adding new features, or enhancing documentation, you're encouraged to contribute.
 
-## License
+# License
 This project is licensed under the MIT License.
